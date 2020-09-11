@@ -1,8 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
     <link rel="stylesheet" href="login.css">
+    <script>
 
+
+      $(document).ready(function(){
+
+        var email,pass
+            $("#submit").click(function(){
+                email=$("#email").val()
+                pass=$("#password").val()
+                
+                $.post("/login",{email:email,pass:pass},function(data){
+                    if(data==='done' && email !='' && pass !='') {
+                        window.location.href="/admin"
+                    }
+                    else{
+                        alert("Please input Username & Password.")
+                    }
+                })
+            })
+      })
+      </script>
 </head>
 <body>
     <div class="headerPic">
@@ -12,17 +34,19 @@
     <div class="container">
       
         <div class="login">
-          <form>
+            <form action="/" method="post" name = "index">
             <h1 class="welcome">Welcome</h1>
             <img class="scale" src="scale.jfif" alt="scale">
-            <input type="text" placeholder="username"/>
-            <input type="password" placeholder="password"/>
-            <button>login</button>
+            <input type="text" placeholder="username" id="email"/>
+            <input type="password" placeholder="password" id="pass"/>
+            <!-- <button onclick="myFunction()" >login</button> -->
+            <input type="submit" value="Submit" id="submit">
             <p class="message">Not registered? <a href="#">Create an account</a></p>
           </form>
         </div>
     </div>
 
 <%- include('includes/scripts'); %>
+
 </body>
 </html>
