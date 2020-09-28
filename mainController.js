@@ -14,11 +14,11 @@ router.get('/',(req,res) => {
 })
 
 router.post('/',(req,res) => {
-    // req.session.user = new user.User(req.body.email, req.body.pass)
+    req.session.user = new user.User(req.body.email, req.body.pass)
 
-    // if(req.session.user){
+    if(req.session.user){
         return res.redirect('/homePage'); 
-    // }
+    }
      
 })
 
