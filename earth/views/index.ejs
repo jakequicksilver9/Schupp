@@ -2,29 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
     <link rel="stylesheet" href="login.css">
-    <script>
-
-
-      $(document).ready(function(){
-
-        var email,pass
-            $("#submit").click(function(){
-                email=$("#email").val()
-                pass=$("#password").val()
-                
-                $.post("/login",{email:email,pass:pass},function(data){
-                    if(data==='done' && email !='' && pass !='') {
-                        window.location.href="/admin"
-                    }
-                    else{
-                        alert("Please input Username & Password.")
-                    }
-                })
-            })
-      })
-      </script>
+    
 </head>
 <body>
     <div class="headerPic">
@@ -34,19 +13,32 @@
     <div class="container">
       
         <div class="login">
-            <form action="/" method="post" name = "index">
-            <h1 class="welcome">Welcome</h1>
-            <img class="scale" src="scale.jfif" alt="scale">
-            <input type="text" placeholder="username" id="email"/>
-            <input type="password" placeholder="password" id="pass"/>
-            <!-- <button onclick="myFunction()" >login</button> -->
-            <input type="submit" value="Submit" id="submit">
-            <p class="message">Not registered? <a href="#">Create an account</a></p>
-          </form>
+            <form action="/login" method="post">
+                <h1 class="welcome">Welcome</h1>
+                <img class="scale" src="scale.jfif" alt="scale">
+                <input type="text" placeholder="username" name="email" id="email"/>
+                <input type="password" placeholder="password" name="password" id="password"/>
+                <!-- <button onclick="myFunction()" >login</button> -->
+                <button type="submit" onclick="handleFailure()" id="submit">login</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
         </div>
     </div>
 
-<%- include('includes/scripts'); %>
-
+    <%- include('includes/scripts'); %>
+    <script>
+        function handleFailure() {
+            
+            if($('#username') !='' && $('#password') !='') {
+                alert("Incorrect Username & Password.")
+            }
+            else{
+                alert("Please input Username & Password.")
+            }
+        }
+        $(document).ready(function(){
+            
+        })
+    </script>
 </body>
 </html>
