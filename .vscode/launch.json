@@ -7,11 +7,20 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Earth",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/Server.js"
+            "program": "${workspaceFolder}/earth/Server.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mars",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/mars/Server.js"
         }
     ]
 }
