@@ -11,11 +11,16 @@ const config = {
 }
 
 exports.login = async (req,res,next) => {
-axios.post('http://localhost:3001/login', qs.stringify(req.body), config )
-    .then(response => res.user = response.data)
-    .catch(error => res.user = error)
-    .then(function (){
-        next()
-    })
+    try {
+        axios.post('http://localhost:3001/login', qs.stringify(req.body), config )
+        .then(response => res.user = response.data)
+        .catch(error => res.user = error)
+        .then(function (){
+            next()
+        })
+    }catch (e){
+        console.log(e)
+    }
+    
 }
 

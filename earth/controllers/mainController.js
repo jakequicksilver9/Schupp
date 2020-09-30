@@ -8,6 +8,11 @@ router.get('/',(req,res) => {
     // if(sess.user.data.email){
     //     return res.redirect('/homePage') 
     // }
+
+    if(typeof sess.user !== 'undefined'){
+        if (sess.user.data.email) res.redirect('/homePage')
+    }
+
     res.render('index')
 })
 
@@ -15,16 +20,20 @@ router.post('/login', dbController.login, (req, res) => {
    
     if(!res.user.isAxiosError){
         req.session.user = res.user
-        return res.redirect('/homePage') 
+        res.sendStatus(200)
     }
-    else return null
+    else res.send(403)
      
 })
 
 router.get('/homePage',(req,res) => {
+    if(typeof req.session.user !== 'undefined'){
+        if (req.session.user.data.email)res.render('homePage')
+        else res.redirect('/')
+    }else{
+        res.redirect('/')
+    }
     
-    res.render('homePage')
-
 })
 
 module.exports = router
