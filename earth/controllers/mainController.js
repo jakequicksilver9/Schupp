@@ -36,4 +36,24 @@ router.get('/homePage',(req,res) => {
     
 })
 
+router.get('/users',(req,res) => {
+    if(typeof req.session.user !== 'undefined'){
+        if (req.session.user.data.email)res.render('users')
+        else res.redirect('/')
+    }else{
+        res.redirect('/')
+    }
+    
+})
+
+router.get('/nav',(req,res) => {
+    if(typeof req.session.user !== 'undefined'){
+        if (req.session.user.data.email)res.render('nav')
+        else res.redirect('/')
+    }else{
+        res.redirect('/')
+    }
+    
+})
+
 module.exports = router
