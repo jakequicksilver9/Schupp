@@ -160,3 +160,7 @@ body {
   height: 16px;
   margin-top: 6px
 }
+
+#office{
+  opacity: .85;
+}
