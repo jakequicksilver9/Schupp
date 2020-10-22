@@ -45,9 +45,11 @@
   background: #43A047;
 }
 .login {
-  margin: 15px 0 0;
+  margin-left: -3rem;
+  margin-top: 10rem;
   color: #b3b3b3;
   font-size: 12px;
+  width: max-content;
 }
 .login a {
   color: #4CAF50;
@@ -93,8 +95,7 @@ body {
   -moz-osx-font-smoothing: grayscale;      
 }
 .scale{
-    width: 50%;
-    margin-bottom: 1rem;
+    margin-top: -3rem;
 }
 .welcome{
     color: black;
