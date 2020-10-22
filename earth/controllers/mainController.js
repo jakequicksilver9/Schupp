@@ -46,14 +46,5 @@ router.get('/users',(req,res) => {
     
 })
 
-router.get('/nav',(req,res) => {
-    if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email)res.render('nav')
-        else res.redirect('/')
-    }else{
-        res.redirect('/')
-    }
-    
-})
 
 module.exports = router

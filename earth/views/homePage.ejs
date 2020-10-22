@@ -136,8 +136,7 @@
         </div>
         <!-- end navbar -->
         <!-- left sidebar -->
-        <div id="nav-placeholder">
-        </div>
+        <%- include('leftSidebar'); %>
         <!-- end left sidebar -->
         <!-- wrapper  -->
         <div class="dashboard-wrapper">
@@ -717,11 +716,6 @@
                 window.alert("hit user funciton");
                 window.location.href="/users"
             })
-
-
-            $(function(){
-                $("#nav-placeholder").load('/nav');
-            });
 
     </script>
 </body>
