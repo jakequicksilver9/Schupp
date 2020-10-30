@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- css for pagination below -->
+    <link rel="stylesheet" href="assets/vendor/datatables/css/jquery.dataTables.min.css">
+    <!-- css for filters below -->
+    <link rel="stylesheet" href="assets/vendor/datatables/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/circular-std/style.css">
+    <link rel="stylesheet" href="assets/libs/css/style.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+
+    <title>Manage Input</title>
+    <link rel = "icon" href = "scale.png" type = "image/x-icon"> 
+
+</head>
+
+<body>
+    <!-- main wrapper -->
+    <div class="dashboard-main-wrapper">
+        <!-- navbar -->
+        <%- include('includes/nav'); %>
+        <!-- left sidebar -->
+        <%- include('includes/leftSidebar'); %>
+
+        <!-- wrapper  -->
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- pageheader  -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Manage Input</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end pageheader  -->
+                <h3>hello manage input</h3>
+                </div>
+            </div>
+            <!-- footer -->
+            <%- include('includes/footer'); %>
+            <!-- end footer -->
+        </div>
+        <!-- end wrapper  -->
+    </div>
+    <!-- end main wrapper  -->
+    <!-- jquery 3.3.1 -->
+    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script>
+
+        $(document).ready(function() {
+            $('#example').DataTable({
+            "pageLength": 35
+            });
+
+    } );
+
+    </script>
+</body>
+ 
+</html>

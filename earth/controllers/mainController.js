@@ -36,6 +36,16 @@ router.get('/homePage',(req,res) => {
     
 })
 
+router.get('/manageInput',(req,res) => {
+    if(typeof req.session.user !== 'undefined'){
+        if (req.session.user.data.email)res.render('manageInput')
+        else res.redirect('/')
+    }else{
+        res.redirect('/')
+    }
+    
+})
+
 router.get('/users',(req,res) => {
     if(typeof req.session.user !== 'undefined'){
         if (req.session.user.data.email)res.render('users')
