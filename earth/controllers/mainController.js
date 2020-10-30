@@ -46,9 +46,12 @@ router.get('/manageInput',(req,res) => {
     
 })
 
-router.get('/users',(req,res) => {
+router.get('/users', dbController.users, (req,res) => {
     if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email)res.render('users')
+        if (req.session.user.data.email){
+
+            res.render('users')
+        }
         else res.redirect('/')
     }else{
         res.redirect('/')

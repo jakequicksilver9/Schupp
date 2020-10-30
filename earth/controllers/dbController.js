@@ -24,3 +24,18 @@ exports.login = async (req,res,next) => {
     
 }
 
+exports.users = async (req,res,next) => {
+    try {
+        config.headers['x-access-token'] = req.session.user.accessToken
+        axios.get('http://localhost:3001/users', config)
+        .then(response => res.users = response.data)
+        .catch(error => res.users = error)
+        .then(function (){
+            next()
+        })
+    }catch (e){
+        console.log(e)
+    }
+    
+}
+

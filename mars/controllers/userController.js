@@ -81,10 +81,14 @@ exports.login = async (req, res, next) => {
 }
 
 exports.getUsers = async (req, res, next) => {
+try {
     const users = await User.find({})
     res.status(200).json({
-     data: users
+    data: users
     })
+} catch (error) {
+    next(error)
+}
    }
     
 exports.getUser = async (req, res, next) => {
