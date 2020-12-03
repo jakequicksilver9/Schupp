@@ -72,7 +72,7 @@
                                 <td>Edinburgh</td>
                                 <td>Tnix@hotmail.com</td>
                                 <td>2011/04/25</td>
-                                <td>$320,800</td>
+                                <td>320,800</td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -81,7 +81,7 @@
                                 <td>Tokyo</td>
                                 <td>GarWinterWOnder@gmail.com</td>
                                 <td>2011/07/25</td>
-                                <td>$170,750</td>
+                                <td>170,750</td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -90,7 +90,16 @@
                                 <td>San Francisco</td>
                                 <td>cox@yahoo.net</td>
                                 <td>2009/01/12</td>
-                                <td>$86,000</td>
+                                <td>86,000</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Aton Cx</td>
+                                <td>11255 lacra lane</td>
+                                <td>San Francisco</td>
+                                <td>cox@yahoo.net</td>
+                                <td>2009/01/12</td>
+                                <td>86,000</td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -135,7 +144,6 @@
                                 <button id="addRow" style="width:200px;">Add new row</button>
                             </div>
                         </div>
-
                     </div>
 
                     <!-- Edit Office Modal -->
@@ -173,6 +181,7 @@
                                         <input id="editOfficeFax" type="text" class="form-control">
                                     </div>
                                 </form>
+                                <button id="editRow" style="width:200px;">Edit row</button>
                             </div>
                         </div>
 
@@ -224,8 +233,6 @@
                 // alert(data);
                 editOfficeModal.style.display = "block";
                 
-                // $("#officeEmailDiv").html("Hello <b>world</b>!");
-                // document.getElementById("editOfficeEmail").placeholder = "Testing";
                 document.getElementById("editOfficeName").value = data[0];
                 document.getElementById("editOfficeAddress").value = data[1];
                 document.getElementById("editOfficeCounty").value = data[2];
@@ -235,27 +242,17 @@
 
             });
 
-            // $('#example tbody').on('click', '.name', function () {
-            //     var row = $(this).closest('tr');
-
-            //     var data = t.row(row).data().name;
-            //     alert(data);
-            // });
-
-
-            var counter = 1;
 
             $('#addRow').on('click', function () {
                 t.row.add([
-                    counter + '.1',
-                    counter + '.2',
-                    counter + '.3',
-                    counter + '.4',
-                    counter + '.5',
-                    counter + '.6'
+                     document.getElementById("officeName").value,
+                     document.getElementById("officeAddress").value,
+                     document.getElementById("officeCounty").value,
+                     document.getElementById("officeEmail").value,
+                     document.getElementById("officePhone").value,
+                     document.getElementById("officeFax").value
                 ]).draw(false);
 
-                counter++;
             });
 
             // When the user clicks on <span> (x), close the modal
