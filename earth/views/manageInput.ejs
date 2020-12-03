@@ -19,7 +19,6 @@
 
     <title>Manage Input</title>
     <link rel="icon" href="scale.png" type="image/x-icon">
-
 </head>
 
 <body>
@@ -62,7 +61,7 @@
                                 <th>Office</th>
                                 <th>Age</th>
                                 <th>Start date</th>
-                                <th>Salary</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -223,7 +222,7 @@
                             <span class="close">&times;</span>
 
                             <div class="card-body">
-                            <h1>Enter New Office</h1>
+                                <h1>Enter New Office</h1>
                                 <form>
                                     <div class="form-group">
                                         <label for="officeName" class="col-form-label">Office Name</label>
@@ -251,7 +250,7 @@
                                         <input id="officeType" type="text" class="form-control">
                                     </div>
                                 </form>
-                            <button id="addRow" style="width:200px;">Add new row</button>
+                                <button id="addRow" style="width:200px;">Add new row</button>
                             </div>
                         </div>
 
@@ -266,29 +265,21 @@
     </div>
     <!-- end main wrapper  -->
 
-    <script src=""></script>
-
-
     <script>
 
         $(document).ready(function () {
             var t = $('#example').DataTable({
 
+                columnDefs: [
+                    {
+                        targets: 5,
+                        render: function (data, type, row, meta) {
+                            return '<input type="button" class="name" id=n-"' + meta.row + '" value="Edit"/>';
+                        }
 
-                responsive: {
-                    details: {
-                        display: $.fn.dataTable.Responsive.display.modal({
-                            header: function (row) {
-                                var data = row.data();
-                                return 'Details for ' + data[0] + ' ' + data[1];
-                            }
-                        }),
-                        renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-                            tableClass: 'table'
-                        })
-                    }
-                },
-
+                    },
+                    { orderable: false, targets: 5 }
+                ],
                 dom: 'Bfrtip',
                 buttons: [
                     {
@@ -296,10 +287,19 @@
                         action: function (e, dt, node, config) {
                             modal.style.display = "block";
                         }
-                        
+
                     }
                 ]
             });
+
+            $('#example tbody').on('click', '.name', function () {
+                var row = $(this).closest('tr');
+
+                var data = table.row(row).data().name;
+                alert(data);
+            });
+
+
             var counter = 1;
 
             $('#addRow').on('click', function () {
