@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,11 +11,18 @@
     <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/fonts/circular-std/style.css">
     <link rel="stylesheet" href="assets/libs/css/style.css">
+    <!-- addedthisone -->
+    <link rel="stylesheet" href="assets/libs/css/manageInput.css">
     <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
 
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+
+
+
     <title>Manage Input</title>
-    <link rel = "icon" href = "scale.png" type = "image/x-icon"> 
+    <link rel="icon" href="scale.png" type="image/x-icon">
 
 </head>
 
@@ -38,7 +45,8 @@
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#"
+                                                    class="breadcrumb-link">Dashboard</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Manage Input</li>
                                         </ol>
                                     </nav>
@@ -47,7 +55,209 @@
                         </div>
                     </div>
                     <!-- end pageheader  -->
-                <h3>hello manage input</h3>
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tiger Nixon</td>
+                                <td>System Architect</td>
+                                <td>Edinburgh</td>
+                                <td>61</td>
+                                <td>2011/04/25</td>
+                                <td>$320,800</td>
+                            </tr>
+                            <tr>
+                                <td>Garrett Winters</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>63</td>
+                                <td>2011/07/25</td>
+                                <td>$170,750</td>
+                            </tr>
+                            <tr>
+                                <td>Ashton Cox</td>
+                                <td>Junior Technical Author</td>
+                                <td>San Francisco</td>
+                                <td>66</td>
+                                <td>2009/01/12</td>
+                                <td>$86,000</td>
+                            </tr>
+                            <tr>
+                                <td>Cedric Kelly</td>
+                                <td>Senior Javascript Developer</td>
+                                <td>Edinburgh</td>
+                                <td>22</td>
+                                <td>2012/03/29</td>
+                                <td>$433,060</td>
+                            </tr>
+                            <tr>
+                                <td>Airi Satou</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>33</td>
+                                <td>2008/11/28</td>
+                                <td>$162,700</td>
+                            </tr>
+                            <tr>
+                                <td>Brielle Williamson</td>
+                                <td>Integration Specialist</td>
+                                <td>New York</td>
+                                <td>61</td>
+                                <td>2012/12/02</td>
+                                <td>$372,000</td>
+                            </tr>
+                            <tr>
+                                <td>Herrod Chandler</td>
+                                <td>Sales Assistant</td>
+                                <td>San Francisco</td>
+                                <td>59</td>
+                                <td>2012/08/06</td>
+                                <td>$137,500</td>
+                            </tr>
+                            <tr>
+                                <td>Rhona Davidson</td>
+                                <td>Integration Specialist</td>
+                                <td>Tokyo</td>
+                                <td>55</td>
+                                <td>2010/10/14</td>
+                                <td>$327,900</td>
+                            </tr>
+                            <tr>
+                                <td>Colleen Hurst</td>
+                                <td>Javascript Developer</td>
+                                <td>San Francisco</td>
+                                <td>39</td>
+                                <td>2009/09/15</td>
+                                <td>$205,500</td>
+                            </tr>
+                            <tr>
+                                <td>Sonya Frost</td>
+                                <td>Software Engineer</td>
+                                <td>Edinburgh</td>
+                                <td>23</td>
+                                <td>2008/12/13</td>
+                                <td>$103,600</td>
+                            </tr>
+                            <tr>
+                                <td>Jena Gaines</td>
+                                <td>Office Manager</td>
+                                <td>London</td>
+                                <td>30</td>
+                                <td>2008/12/19</td>
+                                <td>$90,560</td>
+                            </tr>
+                            <tr>
+                                <td>Quinn Flynn</td>
+                                <td>Support Lead</td>
+                                <td>Edinburgh</td>
+                                <td>22</td>
+                                <td>2013/03/03</td>
+                                <td>$342,000</td>
+                            </tr>
+                            <tr>
+                                <td>Charde Marshall</td>
+                                <td>Regional Director</td>
+                                <td>San Francisco</td>
+                                <td>36</td>
+                                <td>2008/10/16</td>
+                                <td>$470,600</td>
+                            </tr>
+                            <tr>
+                                <td>Haley Kennedy</td>
+                                <td>Senior Marketing Designer</td>
+                                <td>London</td>
+                                <td>43</td>
+                                <td>2012/12/18</td>
+                                <td>$313,500</td>
+                            </tr>
+                            <tr>
+                                <td>Tatyana Fitzpatrick</td>
+                                <td>Regional Director</td>
+                                <td>London</td>
+                                <td>19</td>
+                                <td>2010/03/17</td>
+                                <td>$385,750</td>
+                            </tr>
+                            <tr>
+                                <td>Michael Silva</td>
+                                <td>Marketing Designer</td>
+                                <td>London</td>
+                                <td>66</td>
+                                <td>2012/11/27</td>
+                                <td>$198,500</td>
+                            </tr>
+                            <tr>
+                                <td>Bradley Greer</td>
+                                <td>Software Engineer</td>
+                                <td>London</td>
+                                <td>41</td>
+                                <td>2012/10/13</td>
+                                <td>$132,000</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+
+                            <div class="card-body">
+                            <h1>Enter New Office</h1>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="officeName" class="col-form-label">Office Name</label>
+                                        <input id="officeName" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="officeEmail">Office Email</label>
+                                        <input id="officeEmail" type="email" placeholder="name@example.com"
+                                            class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="officeAddress" class="col-form-label">Office Address</label>
+                                        <input id="officeAddress" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="officeCounty" class="col-form-label">Office County</label>
+                                        <input id="officeCounty" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="officeFax" class="col-form-label">Office Fax</label>
+                                        <input id="officeFax" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="officeType" class="col-form-label">Office Type</label>
+                                        <input id="officeType" type="text" class="form-control">
+                                    </div>
+                                </form>
+                            <button id="addRow" style="width:200px;">Add new row</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <!-- footer -->
@@ -57,21 +267,69 @@
         <!-- end wrapper  -->
     </div>
     <!-- end main wrapper  -->
+
+
     <!-- jquery 3.3.1 -->
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
 
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+
+
     <script>
 
-        $(document).ready(function() {
-            $('#example').DataTable({
-            "pageLength": 35
+        $(document).ready(function () {
+            var t = $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        text: 'Add Office',
+                        action: function (e, dt, node, config) {
+                            modal.style.display = "block";
+                        }
+                    }
+                ]
+            });
+            var counter = 1;
+
+            $('#addRow').on('click', function () {
+                t.row.add([
+                    counter + '.1',
+                    counter + '.2',
+                    counter + '.3',
+                    counter + '.4',
+                    counter + '.5',
+                    counter + '.6'
+                ]).draw(false);
+
+                counter++;
             });
 
-    } );
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+
+
+
+        });
 
     </script>
 </body>
- 
+
 </html>
