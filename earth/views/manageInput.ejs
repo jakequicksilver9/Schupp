@@ -15,11 +15,7 @@
     <link rel="stylesheet" href="assets/libs/css/manageInput.css">
     <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
-
-
+    <link rel="stylesheet" href="assets/vendor/datatables/css/buttons.dataTables.min.css">
 
     <title>Manage Input</title>
     <link rel="icon" href="scale.png" type="image/x-icon">
@@ -33,6 +29,8 @@
         <%- include('includes/nav'); %>
         <!-- left sidebar -->
         <%- include('includes/leftSidebar'); %>
+
+        <%- include('includes/scripts'); %>
 
         <!-- wrapper  -->
         <div class="dashboard-wrapper">
@@ -218,7 +216,7 @@
                     </table>
 
                     <!-- The Modal -->
-                    <div id="myModal" class="modal">
+                    <div id="addOfficeModal" class="modal">
 
                         <!-- Modal content -->
                         <div class="modal-content">
@@ -268,19 +266,29 @@
     </div>
     <!-- end main wrapper  -->
 
-
-    <!-- jquery 3.3.1 -->
-    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
-
-    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src=""></script>
 
 
     <script>
 
         $(document).ready(function () {
             var t = $('#example').DataTable({
+
+
+                responsive: {
+                    details: {
+                        display: $.fn.dataTable.Responsive.display.modal({
+                            header: function (row) {
+                                var data = row.data();
+                                return 'Details for ' + data[0] + ' ' + data[1];
+                            }
+                        }),
+                        renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                            tableClass: 'table'
+                        })
+                    }
+                },
+
                 dom: 'Bfrtip',
                 buttons: [
                     {
@@ -288,6 +296,7 @@
                         action: function (e, dt, node, config) {
                             modal.style.display = "block";
                         }
+                        
                     }
                 ]
             });
@@ -307,7 +316,7 @@
             });
 
             // Get the modal
-            var modal = document.getElementById("myModal");
+            var modal = document.getElementById("addOfficeModal");
 
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
