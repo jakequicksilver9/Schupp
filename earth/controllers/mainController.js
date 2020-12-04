@@ -56,6 +56,16 @@ router.get('/userProfile',(req,res) => {
     
 })
 
+router.get('/approveUsers',(req,res) => {
+    if(typeof req.session.user !== 'undefined'){
+        if (req.session.user.data.email)res.render('approveUsers')
+        else res.redirect('/')
+    }else{
+        res.redirect('/')
+    }
+    
+})
+
 router.get('/users', dbController.users, (req,res) => {
     if(typeof req.session.user !== 'undefined'){
         if (req.session.user.data.email){

@@ -141,7 +141,7 @@
                                         <input id="officeFax" type="text" class="form-control">
                                     </div>
                                 </form>
-                                <button id="addRow" style="width:200px;">Add new row</button>
+                                <a id="addRow" class="btn" style="background-color: rgb(11, 6, 82);">Add new row</a>
                             </div>
                         </div>
                     </div>
@@ -182,6 +182,8 @@
                                     </div>
                                 </form>
                                 <button id="editRow" style="width:200px;">Edit row</button>
+                                <!-- <a id="editRow" class="btn" style="background-color: rgb(11, 6, 82);">Edit Row</a> -->
+
                             </div>
                         </div>
 
@@ -242,11 +244,8 @@
                 document.getElementById("editOfficeEmail").value = data[3];
                 document.getElementById("editOfficePhone").value = data[4];
                 document.getElementById("editOfficeFax").value = data[5];
-            });
-
-            $('#editRow').on('click', function () {
-                const id = $(this).attr("id").match(/\d+/)[0];
-
+            
+                $('#editRow').on('click', function () {
                 t.row(id).data([
                     document.getElementById("editOfficeName").value,
                     document.getElementById("editOfficeAddress").value,
@@ -255,8 +254,11 @@
                     document.getElementById("editOfficePhone").value,
                     document.getElementById("editOfficeFax").value
                 ]).draw(false);
-
             });
+            
+            });
+
+
 
             $('#addRow').on('click', function () {
                 t.row.add([
