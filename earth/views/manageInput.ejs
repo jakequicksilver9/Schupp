@@ -224,7 +224,6 @@
                 ]
             });
 
-
             $('#example tbody').on('click', '.edit', function () {
             var editOfficeModal = document.getElementById("editOfficeModal");
                 var id = $(this).attr("id").match(/\d+/)[0];
@@ -241,7 +240,6 @@
                 document.getElementById("editOfficeFax").value = data[5];
 
             });
-
 
             $('#addRow').on('click', function () {
                 t.row.add([
@@ -272,10 +270,6 @@
                     editOfficeModal.style.display = "none";
                 }
             }
-
-
-
-
 
         });
 
