@@ -58,223 +58,43 @@
                         <form>
                             <div class="form-group">
                                 <label for="officeName" class="col-form-label">Name</label>
-                                <input id="officeName" type="text" class="form-control">
+                                <input id="officeName" type="text" class="form-control" value="User's Name">
                             </div>
                             <div class="form-group">
                                 <label for="officeAddress" class="col-form-label">Address</label>
-                                <input id="officeAddress" type="text" class="form-control">
+                                <input id="officeAddress" type="text" class="form-control" value="User's Address">
                             </div>
                             <div class="form-group">
                                 <label for="officeCounty" class="col-form-label">County</label>
-                                <input id="officeCounty" type="text" class="form-control">
+                                <input id="officeCounty" type="text" class="form-control" value="User's County">
                             </div>
                             <div class="form-group">
                                 <label for="officeEmail">Email</label>
-                                <input id="officeEmail" type="email" placeholder="name@example.com"
-                                    class="form-control">
+                                <input id="officeEmail" type="email" placeholder="name@example.com" class="form-control" value="User's Email">
                             </div>
                             <div class="form-group">
                                 <label for="officePhone" class="col-form-label">Phone</label>
-                                <input id="officePhone" type="text" class="form-control">
+                                <input id="officePhone" type="text" class="form-control" value="User's Phone">
                             </div>
                             <div class="form-group">
                                 <label for="officeFax" class="col-form-label">Fax</label>
-                                <input id="officeFax" type="text" class="form-control">
+                                <input id="officeFax" type="text" class="form-control" value="User's Fax">
                             </div>
-                        </form>
+                        </form><br>
                         <a class="btn" style="background-color: rgb(11, 6, 82);">Submit Change</a>
                     </div>
                 </div>
-
-                    <!-- Add Office Modal -->
-                    <div id="addOfficeModal" class="modal">
-
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-
-                            <div class="card-body">
-                                <h1>Enter New Office</h1>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="officeName" class="col-form-label">Office Name</label>
-                                        <input id="officeName" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="officeAddress" class="col-form-label">Office Address</label>
-                                        <input id="officeAddress" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="officeCounty" class="col-form-label">Office County</label>
-                                        <input id="officeCounty" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="officeEmail">Office Email</label>
-                                        <input id="officeEmail" type="email" placeholder="name@example.com"
-                                            class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="officePhone" class="col-form-label">Office Phone</label>
-                                        <input id="officePhone" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="officeFax" class="col-form-label">Office Fax</label>
-                                        <input id="officeFax" type="text" class="form-control">
-                                    </div>
-                                </form>
-                                <button id="addRow" style="width:200px;">Add new row</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Edit Office Modal -->
-                    <div id="editOfficeModal" class="modal">
-
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-
-                            <div class="card-body">
-                                <h1>Edit Office</h1>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="editOfficeName" class="col-form-label">Edit Name</label>
-                                        <input id="editOfficeName" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="editOfficeAddress" class="col-form-label">Edit Address</label>
-                                        <input id="editOfficeAddress" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="editOfficeCounty" class="col-form-label">Edit County</label>
-                                        <input id="editOfficeCounty" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group" id="officeEmailDiv">
-                                        <label for="editOfficeEmail">Edit Email</label>
-                                        <input id="editOfficeEmail" type="email" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="editOfficePhone" class="col-form-label">Edit Office Phone</label>
-                                        <input id="editOfficePhone" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="editOfficeFax" class="col-form-label">Edit Fax</label>
-                                        <input id="editOfficeFax" type="text" class="form-control">
-                                    </div>
-                                </form>
-                                <button id="editRow" style="width:200px;">Edit row</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
             </div>
-            <!-- footer -->
-            <%- include('includes/footer'); %>
-            <!-- end footer -->
         </div>
-        <!-- end wrapper  -->
+        <!-- footer -->
+        <%- include('includes/footer'); %>
+        <!-- end footer -->
+    </div>
+    <!-- end wrapper  -->
     </div>
     <!-- end main wrapper  -->
 
-    <script>
 
-        $(document).ready(function () {
-            var t = $('#example').DataTable({
-
-                columnDefs: [
-                    {
-                        targets: 6,
-                        render: function (data, type, row, meta) {
-                            return '<input type="button" class="edit" id=edit"' + meta.row + '" value="Edit"/>';
-                        }
-
-                    },
-                    { orderable: false, targets: 6 }
-                ],
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        text: 'Add Office',
-                        action: function (e, dt, node, config) {
-                            addOfficeModal.style.display = "block";
-                        }
-
-                    }
-                ]
-            });
-
-            $('#example tbody').on('click', '.edit', function () {
-                var editOfficeModal = document.getElementById("editOfficeModal");
-                // var id = $(this).attr("id").match(/\d+/)[0];
-                const id = $(this).attr("id").match(/\d+/)[0];
-                var row = t.row(this);
-                debugger;
-
-                var data = t.row(id).data();
-                // alert(data[0]);
-                // alert(data);
-                editOfficeModal.style.display = "block";
-
-                document.getElementById("editOfficeName").value = data[0];
-                document.getElementById("editOfficeAddress").value = data[1];
-                document.getElementById("editOfficeCounty").value = data[2];
-                document.getElementById("editOfficeEmail").value = data[3];
-                document.getElementById("editOfficePhone").value = data[4];
-                document.getElementById("editOfficeFax").value = data[5];
-            });
-
-            $('#editRow').on('click', function () {
-                const id = $(this).attr("id").match(/\d+/)[0];
-
-                t.row(id).data([
-                    document.getElementById("editOfficeName").value,
-                    document.getElementById("editOfficeAddress").value,
-                    document.getElementById("editOfficeCounty").value,
-                    document.getElementById("editOfficeEmail").value,
-                    document.getElementById("editOfficePhone").value,
-                    document.getElementById("editOfficeFax").value
-                ]).draw(false);
-
-            });
-
-
-
-            $('#addRow').on('click', function () {
-                t.row.add([
-                    document.getElementById("officeName").value,
-                    document.getElementById("officeAddress").value,
-                    document.getElementById("officeCounty").value,
-                    document.getElementById("officeEmail").value,
-                    document.getElementById("officePhone").value,
-                    document.getElementById("officeFax").value
-                ]).draw(false);
-
-            });
-
-            // When the user clicks on <span> (x), close the modal
-            document.getElementsByClassName("close")[0].onclick = function () {
-                addOfficeModal.style.display = "none";
-            }
-            document.getElementsByClassName("close")[1].onclick = function () {
-                editOfficeModal.style.display = "none";
-            }
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target == addOfficeModal) {
-                    addOfficeModal.style.display = "none";
-                }
-                if (event.target == editOfficeModal) {
-                    editOfficeModal.style.display = "none";
-                }
-            }
-
-
-        });
-
-    </script>
 </body>
 
 </html>
