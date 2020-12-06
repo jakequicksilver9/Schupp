@@ -26,6 +26,19 @@ router.post('/login', dbController.login, (req, res) => {
      
 })
 
+router.post('/logout', (req, res) => {
+
+
+    req.session.destroy((err) => {
+        if(err) {
+            alert("log")
+            return console.log(err)
+        }
+        res.redirect('/')
+    })
+     
+})
+
 router.post('/signUp', dbController.signUp, (req, res) => {
    
     if(!res.user.isAxiosError){
@@ -116,6 +129,7 @@ function notPending(user) {
 function isPending(user) {
     return user.role == "pending";
 }
+
 
 
 module.exports = router

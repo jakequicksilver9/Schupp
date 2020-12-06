@@ -114,7 +114,6 @@
             if($('#email').val() !='' && $('#password').val() !='') {
                 $.post('/login',$('#loginForm').serialize()).done(function() {
                     window.location.replace('/homePage')
-                    console.log("Home page post was hit")
                 }).fail(function(){
                     alert("Incorrect Username & Password.")
                 })

@@ -128,12 +128,25 @@
 
                 denyModal.style.display = "block";
 
-                
+
                 t
                     .row($(this).parents('tr'))
                     .remove()
                     .draw();
             });
+
+            var email,pass
+
+            $("#logOut").click(function(){
+                  email="";
+                  pass="";
+                  
+                  $.post("/login",function(data){
+                    //   if(data==='done') {
+                          window.location.href="/logout"
+                    //   }
+                  })
+              })
 
             // When the user clicks on <span> (x), close the modal
             document.getElementsByClassName("close")[0].onclick = function () {
