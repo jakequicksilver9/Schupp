@@ -14,7 +14,7 @@ const UserSchema = new Schema({
  role: {
   type: String,
   default: 'basic',
-  enum: ["basic", "admin", "superuser"]
+  enum: ["pending","basic", "admin", "superuser"]
  },
  accessToken: {
   type: String

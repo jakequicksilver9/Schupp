@@ -45,16 +45,16 @@ exports.signup = async (req, res, next) => {
     try {
     const { email, password, role } = req.body
     const hashedPassword = await hashPassword(password)
-    const newUser = new User({ email, password: hashedPassword, role: role || "basic" })
+    const newUser = new User({ email, password: hashedPassword, role: "pending" })
     const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
     expiresIn: "1d"
     })
     newUser.accessToken = accessToken
     await newUser.save()
-    res.json({
-    data: newUser,
-    accessToken
-    })
+    res.status(200).json({
+        data: { email: newUser.email, role: newUser.role },
+        accessToken
+        })
     } catch (error) {
     next(error)
     }
@@ -71,10 +71,15 @@ exports.login = async (req, res, next) => {
         expiresIn: "1d"
         })
         await User.findByIdAndUpdate(user._id, { accessToken })
-        res.status(200).json({
-        data: { email: user.email, role: user.role },
-        accessToken
-        })
+        if (user.role != "pending"){
+            res.status(200).json({
+            data: { email: user.email, role: user.role },
+            accessToken
+            })
+        }
+        else {
+            throw new Error("Invalid Role")
+        }
     } catch (error) {
         next(error)
     }
