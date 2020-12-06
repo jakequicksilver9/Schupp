@@ -38,7 +38,9 @@ router.post('/signUp', dbController.signUp, (req, res) => {
 
 router.get('/homePage',(req,res) => {
     if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email)res.render('homePage')
+        if (req.session.user.data.email){
+            res.render('homePage')
+        }
         else res.redirect('/')
     }else{
         res.redirect('/')
@@ -48,7 +50,10 @@ router.get('/homePage',(req,res) => {
 
 router.get('/manageInput',(req,res) => {
     if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email)res.render('manageInput')
+        if (req.session.user.data.email){
+            if (adminOrSuperOnly(req.session.user.data.role)) res.render('manageInput')
+            else res.redirect('/')
+        }
         else res.redirect('/')
     }else{
         res.redirect('/')
@@ -58,7 +63,9 @@ router.get('/manageInput',(req,res) => {
 
 router.get('/userProfile',(req,res) => {
     if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email)res.render('userProfile')
+        if (req.session.user.data.email){
+            res.render('userProfile')
+        }
         else res.redirect('/')
     }else{
         res.redirect('/')
@@ -66,9 +73,15 @@ router.get('/userProfile',(req,res) => {
     
 })
 
-router.get('/approveUsers',(req,res) => {
+router.get('/approveUsers', dbController.users, (req,res) => {
     if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email)res.render('approveUsers')
+        if (req.session.user.data.email){
+            if (adminOrSuperOnly(req.session.user.data.role)){
+                var users = res.users.data;
+                res.render('approveUsers', {users: users.filter(isPending)})
+            }
+            else res.redirect('/')
+        }
         else res.redirect('/')
     }else{
         res.redirect('/')
@@ -79,8 +92,11 @@ router.get('/approveUsers',(req,res) => {
 router.get('/users', dbController.users, (req,res) => {
     if(typeof req.session.user !== 'undefined'){
         if (req.session.user.data.email){
-
-            res.render('users')
+            if (adminOrSuperOnly(req.session.user.data.role)){
+                var users = res.users.data;
+                 res.render('users', {users: users.filter(notPending)})
+            }
+            else res.redirect('/')
         }
         else res.redirect('/')
     }else{
@@ -88,6 +104,18 @@ router.get('/users', dbController.users, (req,res) => {
     }
     
 })
+
+function adminOrSuperOnly(role){
+    if (role == "admin" || role == "superuser") return true
+    else return false
+}
+
+function notPending(user) {
+    return user.role != "pending";
+}
+function isPending(user) {
+    return user.role == "pending";
+}
 
 
 module.exports = router
