@@ -164,6 +164,12 @@
                 var denyModal = document.getElementById("approveModal");
 
                 denyModal.style.display = "block";
+
+                
+                t
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
             });
 
             // When the user clicks on <span> (x), close the modal
