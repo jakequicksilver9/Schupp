@@ -9,6 +9,8 @@ ac.grant("basic")
 ac.grant("admin")
  .extend("basic")
  .readAny("profile")
+ .updateAny("profile")
+ .deleteAny("profile")
  
 ac.grant("superuser")
  .extend("basic")

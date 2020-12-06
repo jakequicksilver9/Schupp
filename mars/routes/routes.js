@@ -12,6 +12,8 @@ router.get('/users', userController.allowIfLoggedin, userController.grantAccess(
 // router.get('/users', userController.allowIfLoggedin, userController.getUsers);
 
 router.put('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('updateAny', 'profile'), userController.updateUser);
+
+router.get('/approve/:userId', userController.allowIfLoggedin,  userController.approveUser);
  
 router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser);
  

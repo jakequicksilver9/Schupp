@@ -46,6 +46,33 @@ exports.users = async (req,res,next) => {
     }catch (e){
         console.log(e)
     }
-    
+}
+
+exports.delete = async (req,res,next) => {
+    try {
+        config.headers['x-access-token'] = req.session.user.accessToken
+        axios.delete('http://localhost:3001/user/' + req.body.id, config)
+        .then(response => res.users = response.data)
+        .catch(error => res.users = error)
+        .then(function (){
+            next()
+        })
+    }catch (e){
+        console.log(e)
+    }
+}
+
+exports.approve = async (req,res,next) => {
+    try {
+        config.headers['x-access-token'] = req.session.user.accessToken
+        axios.get('http://localhost:3001/approve/' + req.body.id, config)
+        .then(response => res.users = response.data)
+        .catch(error => res.users = error)
+        .then(function (){
+            next()
+        })
+    }catch (e){
+        console.log(e)
+    }
 }
 

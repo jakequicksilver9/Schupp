@@ -43,9 +43,9 @@ async function validatePassword(plainPassword, hashedPassword) {
  
 exports.signup = async (req, res, next) => {
     try {
-    const { email, password, role } = req.body
+    const { email, password, role, name, phone } = req.body
     const hashedPassword = await hashPassword(password)
-    const newUser = new User({ email, password: hashedPassword, role: "pending" })
+    const newUser = new User({ email, password: hashedPassword, role: "pending", name:name, phone:phone })
     const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
     expiresIn: "1d"
     })
@@ -123,6 +123,21 @@ try {
     next(error)
 }
 }
+
+exports.approveUser = async (req, res, next) => {
+    try {
+        const userId = req.params.userId
+        const user = await User.findById(userId)
+        user.role = "basic"
+        await User.findByIdAndUpdate(userId, user)
+        res.status(200).json({
+        data: "",
+        message: 'User has been updated'
+        })
+    } catch (error) {
+        next(error)
+    }
+    }
 
 exports.deleteUser = async (req, res, next) => {
 try {

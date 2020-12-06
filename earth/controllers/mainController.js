@@ -120,6 +120,17 @@ router.get('/users', dbController.users, (req,res) => {
     
 })
 
+router.post('/approve', dbController.approve, (req, res) => {
+    res.redirect('approveUsers')
+     
+})
+
+router.post('/deny', dbController.delete, (req,res) => {
+
+    res.redirect('approveUsers')
+     
+})
+
 function adminOrSuperOnly(role){
     if (role == "admin" || role == "superuser") return true
     else return false
