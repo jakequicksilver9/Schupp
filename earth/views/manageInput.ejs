@@ -208,9 +208,8 @@
                     {
                         targets: 6,
                         render: function (data, type, row, meta) {
-                            return '<input type="button" class="edit btn btn-primary" id=edit"' + meta.row + '" value="Edit"/>';
+                            return '<input type="button" class="edit" id=edit"' + meta.row + '" value="Edit"/>  <input type="button" class="delete" id=delete"' + meta.row + '" value="Delete"/>';
                         }
-
                     },
                     { orderable: false, targets: 6 }
                 ],
@@ -249,7 +248,7 @@
             $('#example tbody').on('click', '.edit', function () {
                 var editOfficeModal = document.getElementById("editOfficeModal");
                 // var id = $(this).attr("id").match(/\d+/)[0];
-                const id = $(this).attr("id").match(/\d+/)[0];
+                var id = t.row($(this).parents('tr'));
                 var row = t.row(this);
 
                 var data = t.row(id).data();
@@ -263,21 +262,32 @@
                 document.getElementById("editOfficeEmail").value = data[3];
                 document.getElementById("editOfficePhone").value = data[4];
                 document.getElementById("editOfficeFax").value = data[5];
-            
-                $('#editRow').on('click', function () {
-                t.row(id).data([
-                    document.getElementById("editOfficeName").value,
-                    document.getElementById("editOfficeAddress").value,
-                    document.getElementById("editOfficeCounty").value,
-                    document.getElementById("editOfficeEmail").value,
-                    document.getElementById("editOfficePhone").value,
-                    document.getElementById("editOfficeFax").value
-                ]).draw(false);
-            });
-            
+
+
             });
 
 
+            $('#editRow').on('click', function () {
+                    // alert(Number(row))
+                    t.row().remove().draw();
+                    t.row.add([
+                        document.getElementById("editOfficeName").value,
+                        document.getElementById("editOfficeAddress").value,
+                        document.getElementById("editOfficeCounty").value,
+                        document.getElementById("editOfficeEmail").value,
+                        document.getElementById("editOfficePhone").value,
+                        document.getElementById("editOfficeFax").value
+                ]).draw();
+                // editOfficeModal.style.display = "none";
+                
+                });
+
+            $('#example tbody').on('click', '.delete', function () {
+                t
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+            });
 
             $('#addRow').on('click', function () {
                 t.row.add([
