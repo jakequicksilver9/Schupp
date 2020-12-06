@@ -28,7 +28,6 @@ router.post('/login', dbController.login, (req, res) => {
 
 router.post('/logout', (req, res) => {
 
-
     req.session.destroy((err) => {
         if(err) {
             return console.log(err)
@@ -36,6 +35,10 @@ router.post('/logout', (req, res) => {
         res.redirect('/')
     })
      
+})
+
+router.post('/nav', (req, res) => {
+    
 })
 
 router.post('/signUp', dbController.signUp, (req, res) => {
