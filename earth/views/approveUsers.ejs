@@ -17,8 +17,9 @@
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <link rel="stylesheet" href="assets/vendor/datatables/css/buttons.dataTables.min.css">
 
-    <title>Manage Input</title>
+    <title>Approve Users</title>
     <link rel="icon" href="scale.png" type="image/x-icon">
+
 </head>
 
 <body>
@@ -146,7 +147,7 @@
                     {
                         targets: 6,
                         render: function (data, type, row, meta) {
-                            return '<input type="button" class="approve" id=approve"' + meta.row + '" value="Approve"/>  <input type="button" class="deny" id=deny"' + meta.row + '" value="Deny"/>';
+                            return '<input type="button" class="approve btn btn-primary" id=approve"' + meta.row + '" value="Approve"/>  <input type="button" class="deny btn btn-secondary" id=deny"' + meta.row + '" value="Deny"/>';
                         }
 
                     },
@@ -182,7 +183,6 @@
                     denyModal.style.display = "none";
                 }
             }
-
 
         });
 

@@ -141,7 +141,7 @@
                                         <input id="officeFax" type="text" class="form-control">
                                     </div>
                                 </form>
-                                <a id="addRow" class="btn" style="background-color: rgb(11, 6, 82);">Add new row</a>
+                                <a id="addRow" class="btn btn-primary" style="background-color: rgb(11, 6, 82);">Add new row</a>
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                                         <input id="editOfficeFax" type="text" class="form-control">
                                     </div>
                                 </form>
-                                <button id="editRow" style="width:200px;">Edit row</button>
+                                <button id="editRow" class="btn btn-primary" style="width:200px;">Edit row</button>
                                 <!-- <a id="editRow" class="btn" style="background-color: rgb(11, 6, 82);">Edit Row</a> -->
 
                             </div>
@@ -208,22 +208,42 @@
                     {
                         targets: 6,
                         render: function (data, type, row, meta) {
-                            return '<input type="button" class="edit" id=edit"' + meta.row + '" value="Edit"/>';
+                            return '<input type="button" class="edit btn btn-primary" id=edit"' + meta.row + '" value="Edit"/>';
                         }
 
                     },
                     { orderable: false, targets: 6 }
                 ],
                 dom: 'Bfrtip',
-                buttons: [
-                    {
-                        text: 'Add Office',
-                        action: function (e, dt, node, config) {
-                            addOfficeModal.style.display = "block";
-                        }
+                buttons: {
+                    buttons: [
+                        {
+                            text: 'Add Office',
+                            action: function (e, dt, node, config) {
+                                addOfficeModal.style.display = "block";
+                            },
+                            className:'btn btn-primary'
 
+                        }
+                    ],
+                    dom: {
+                        button: {
+                        className: 'btn'
+                        }
                     }
-                ]
+                }
+
+
+                // buttons: [
+                //     {
+                //         text: 'Add Office',
+                //         action: function (e, dt, node, config) {
+                //             addOfficeModal.style.display = "block";
+                //         },
+                //         className:'btn btn-primary'
+
+                //     }
+                // ]
             });
 
             $('#example tbody').on('click', '.edit', function () {
@@ -231,7 +251,6 @@
                 // var id = $(this).attr("id").match(/\d+/)[0];
                 const id = $(this).attr("id").match(/\d+/)[0];
                 var row = t.row(this);
-                debugger;
 
                 var data = t.row(id).data();
                 // alert(data[0]);
