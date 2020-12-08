@@ -42,7 +42,8 @@
   cursor: pointer;
 }
 .login button:hover,.login button:active,.login button:focus {
-  background: #43A047;
+  /* background: #43A047; */
+  background: rgb(11, 6, 82);
 }
 .login {
   margin-left: -3rem;
