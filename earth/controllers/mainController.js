@@ -92,6 +92,19 @@ router.get('/userProfile',(req,res) => {
     
 })
 
+router.get('/nav',(req,res) => {
+    if(typeof req.session.user !== 'undefined'){
+        if (req.session.user.data.email){
+            var thisUser = req.session.user.data
+            res.render('nav', {thisUser : thisUser})
+        }
+        else res.redirect('/')
+    }else{
+        res.redirect('/')
+    }
+    
+})
+
 router.get('/docs',(req,res) => {
     if(typeof req.session.user !== 'undefined'){
         if (req.session.user.data.email){
