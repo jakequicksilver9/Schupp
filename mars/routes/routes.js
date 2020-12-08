@@ -21,9 +21,11 @@ router.delete('/user/:userId', userController.allowIfLoggedin, userController.gr
 
 
 //files
-router.post('/upload/:userId', fileController.upload);
+router.post('/upload/:fileId', fileController.upload);
 
 router.get('/files', userController.allowIfLoggedin, fileController.getFiles);
+
+router.delete('/files/:fileId', userController.allowIfLoggedin, fileController.deleteFile);
 
  
 module.exports = router;

@@ -104,3 +104,17 @@ exports.files = async (req,res,next) => {
     }
 }
 
+exports.deleteFile = async (req,res,next) => {
+    try {
+        config.headers['x-access-token'] = req.session.user.accessToken
+        axios.delete('http://localhost:3001/files/' + req.body.id, config)
+        .then(response => res.data = response.data)
+        .catch(error => res.error = error)
+        .then(function (){
+            next()
+        })
+    }catch (e){
+        console.log(e)
+    }
+}
+

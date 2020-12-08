@@ -95,11 +95,11 @@ router.get('/userProfile',(req,res) => {
 })
 
 
-router.get('/docs',(req,res) => {
+router.get('/upload',(req,res) => {
     if(typeof req.session.user !== 'undefined'){
         if (req.session.user.data.email){
             var thisUser = req.session.user.data
-            res.render('docs' , {thisUser : thisUser})
+            res.render('upload' , {thisUser : thisUser})
         }
         else res.redirect('/')
     }else{
@@ -151,7 +151,15 @@ router.post('/upload', dbController.upload, (req, res) => {
 
 router.get('/files', dbController.files, (req, res) => {
     var files = res.files.data
-    res.render('files', {files: files})
+    var thisUser = req.session.user.data
+
+    res.render('files', {files: files, thisUser: thisUser})
+})
+
+router.post('/deleteFile', dbController.deleteFile, (req,res) => {
+
+    res.send(200)
+     
 })
 
 router.post('/approve', dbController.approve, (req, res) => {
