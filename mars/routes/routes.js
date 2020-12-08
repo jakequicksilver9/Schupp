@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const fileController = require('../controllers/fileController');
+
  
 router.post('/signup', userController.signup);
  
@@ -17,6 +19,11 @@ router.get('/approve/:userId', userController.allowIfLoggedin,  userController.a
  
 router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser);
 
-router.post('/upload/:userId', userController.upload);
+
+//files
+router.post('/upload/:userId', fileController.upload);
+
+router.get('/files', userController.allowIfLoggedin, fileController.getFiles);
+
  
 module.exports = router;

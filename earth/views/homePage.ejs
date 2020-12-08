@@ -189,32 +189,26 @@
         function upload(){
             var file = document.getElementById("customFileInput").files[0]
             if(file){
-                // var reader = new FileReader()
-                // reader.onload = function(){
-                //     var arrayBuffer = reader.result
-                //     return arrayBuffer
-                // }
-              readFile(file)
+                
+              readFile(file, file.name)
 
             } else {
                 alert("Please select a file.")
             }
         }
 
-        function cb(base64string) {
-            $.post('/upload',{file: base64string}).done(function() {
-               
-            debugger;
-
+        function cb(base64string, fileName) {
+            $.post('/upload',{file: base64string, name: fileName}).done(function(data) {
+               alert("File sucessfully uploaded")
             }).fail(function(){
                 alert("Failed to upload.")
             })
         }
 
-        function readFile(file) {
+        function readFile(file, fileName) {
             let myReader = new FileReader();
             myReader.onloadend = function (e) {
-                cb(myReader.result);
+                cb(myReader.result, fileName);
             };
             myReader.readAsDataURL(file);
         };

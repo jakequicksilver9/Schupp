@@ -146,7 +146,12 @@ router.get('/users', dbController.users, (req,res) => {
 })
 
 router.post('/upload', dbController.upload, (req, res) => {
-    debugger; 
+    res.send(200) 
+})
+
+router.get('/files', dbController.files, (req, res) => {
+    var files = res.files.data
+    res.render('files', {files: files})
 })
 
 router.post('/approve', dbController.approve, (req, res) => {

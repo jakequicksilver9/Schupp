@@ -90,3 +90,17 @@ exports.upload = async (req,res,next) => {
     
 }
 
+exports.files = async (req,res,next) => {
+    try {
+        config.headers['x-access-token'] = req.session.user.accessToken
+        axios.get('http://localhost:3001/files', config)
+        .then(response => res.files = response.data)
+        .catch(error => res.errpr = error)
+        .then(function (){
+            next()
+        })
+    }catch (e){
+        console.log(e)
+    }
+}
+
