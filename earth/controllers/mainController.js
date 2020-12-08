@@ -82,7 +82,33 @@ router.get('/manageInput',(req,res) => {
 router.get('/userProfile',(req,res) => {
     if(typeof req.session.user !== 'undefined'){
         if (req.session.user.data.email){
-            res.render('userProfile')
+            var thisUser = req.session.user.data
+            res.render('userProfile', {thisUser : thisUser})
+        }
+        else res.redirect('/')
+    }else{
+        res.redirect('/')
+    }
+    
+})
+
+router.get('/nav',(req,res) => {
+    if(typeof req.session.user !== 'undefined'){
+        if (req.session.user.data.email){
+            var thisUser = req.session.user.data
+            res.render('nav', {thisUser : thisUser})
+        }
+        else res.redirect('/')
+    }else{
+        res.redirect('/')
+    }
+    
+})
+
+router.get('/docs',(req,res) => {
+    if(typeof req.session.user !== 'undefined'){
+        if (req.session.user.data.email){
+            res.render('docs')
         }
         else res.redirect('/')
     }else{
