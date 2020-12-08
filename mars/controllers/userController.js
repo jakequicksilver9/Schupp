@@ -1,7 +1,30 @@
 const User = require('../classes/user')
+const File = require('../classes/file')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../classes/roles')
+const fs = require('fs');
+
+exports.upload = async (req, res, next) => {
+    try {
+        const { file } = req.body
+        const userId = req.params.userId
+        // const user = await User.findById(userId)
+        
+        const fileUpload = new File({ file: file, userId: userId})
+        
+        await fileUpload.save()
+        res.status(200).json({
+            data: { message: "done" }
+            })
+            
+
+
+    } catch (error) {
+        next(error)
+    }
+}
+
  
 exports.grantAccess = function(action, resource) {
  return async (req, res, next) => {
@@ -73,7 +96,7 @@ exports.login = async (req, res, next) => {
         await User.findByIdAndUpdate(user._id, { accessToken })
         if (user.role != "pending"){
             res.status(200).json({
-            data: { email: user.email, role: user.role },
+            data: { email: user.email, role: user.role, id:user._id },
             accessToken
             })
         }
@@ -151,3 +174,6 @@ try {
     next(error)
 }
 }
+
+
+

@@ -16,5 +16,7 @@ router.put('/user/:userId', userController.allowIfLoggedin, userController.grant
 router.get('/approve/:userId', userController.allowIfLoggedin,  userController.approveUser);
  
 router.delete('/user/:userId', userController.allowIfLoggedin, userController.grantAccess('deleteAny', 'profile'), userController.deleteUser);
+
+router.post('/upload/:userId', userController.upload);
  
 module.exports = router;
