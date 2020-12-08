@@ -76,3 +76,17 @@ exports.approve = async (req,res,next) => {
     }
 }
 
+exports.upload = async (req,res,next) => {
+    try {
+        axios.post('http://localhost:3001/upload/' + req.session.user.data.id, qs.stringify(req.body), config )
+        .then(response => res.message = response.data)
+        .catch(error => res.error = error)
+        .then(function (){
+            next()
+        })
+    }catch (e){
+        console.log(e)
+    }
+    
+}
+

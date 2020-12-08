@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const dbController = require('./dbController')
+// const multiparty = require('connect-multiparty')();
+// const fs = require('fs');
+// const Gridfs = require('gridfs-stream');
 
 router.get('/',(req,res) => {
     let sess = req.session
@@ -37,9 +40,9 @@ router.post('/logout', (req, res) => {
      
 })
 
-router.post('/nav', (req, res) => {
+// router.post('/nav', (req, res) => {
     
-})
+// })
 
 router.post('/signUp', dbController.signUp, (req, res) => {
    
@@ -54,7 +57,7 @@ router.post('/signUp', dbController.signUp, (req, res) => {
 router.get('/homePage',(req,res) => {
     if(typeof req.session.user !== 'undefined'){
         if (req.session.user.data.email){
-            res.render('homePage')
+            res.render('homePage', {role: req.session.user.data.role})
         }
         else res.redirect('/')
     }else{
@@ -118,6 +121,10 @@ router.get('/users', dbController.users, (req,res) => {
         res.redirect('/')
     }
     
+})
+
+router.post('/upload', dbController.upload, (req, res) => {
+    debugger; 
 })
 
 router.post('/approve', dbController.approve, (req, res) => {
