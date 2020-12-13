@@ -1,27 +1,26 @@
 const express = require('express')
 const router = express.Router()
-const dbController = require('./dbController')
+const userController = require('../controllers/userController');
+const fileController = require('../controllers/fileController');
 // const multiparty = require('connect-multiparty')();
 // const fs = require('fs');
 // const Gridfs = require('gridfs-stream');
 
 router.get('/',(req,res) => {
-    let sess = req.session
+    // let sess = req.session
 
     // if(sess.user.data.email){
     //     return res.redirect('/homePage') 
     // }
 
-    if(typeof sess.user !== 'undefined'){
-        if (sess.user.data.email) res.redirect('/homePage')
-    }
-
-    res.render('index')
+    if(req.session.user){
+        res.redirect('/homePage')
+    } else res.render('index')
 })
 
-router.post('/login', dbController.login, (req, res) => {
+router.post('/login', userController.login, (req, res) => {
    
-    if(!res.user.isAxiosError){
+    if(res.user){
         req.session.user = res.user
         res.sendStatus(200)
     }
@@ -44,139 +43,137 @@ router.post('/logout', (req, res) => {
     
 // })
 
-router.post('/signUp', dbController.signUp, (req, res) => {
+router.post('/signUp', userController.signup, (req, res) => {
    
-    if(!res.user.isAxiosError){
-        req.session.user = res.user
-        res.sendStatus(200)
-    }
-    else res.send(403)
+    // if(!res.user.isAxiosError){
+    //     req.session.user = res.user
+    //     res.sendStatus(200)
+    // }
+    // else res.send(403)
      
 })
 
-router.get('/homePage',(req,res) => {
-    if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email){
-            var thisUser = req.session.user.data
-            res.render('homePage', {role: req.session.user.data.role, thisUser: thisUser})
+router.get('/homePage', userController.allowIfLoggedin, (req,res) => {
+    // if(typeof req.session.user !== 'undefined'){
+        if (req.session.user){
+            var thisUser = req.session.user
+            res.render('homePage', {thisUser: thisUser})
         }
-        else res.redirect('/')
-    }else{
-        res.redirect('/')
-    }
+        // else res.redirect('/')
+    // }else{
+        // res.redirect('/')
+    // }
     
 })
 
-router.get('/manageInput',(req,res) => {
-    if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email){
-            var thisUser = req.session.user.data
-            if (adminOrSuperOnly(req.session.user.data.role)) res.render('manageInput', {thisUser : thisUser})
-            else res.redirect('/')
+router.get('/manageInput', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), (req,res) => {
+    // if(typeof req.session.user !== 'undefined'){
+        if (req.session.user){
+            var thisUser = req.session.user
+            // if (adminOrSuperOnly(thisUser.role)) 
+            res.render('manageInput', {thisUser : thisUser})
+            // else res.redirect('/')
         }
-        else res.redirect('/')
-    }else{
-        res.redirect('/')
-    }
+        // else res.redirect('/')
+    // }else{
+        // res.redirect('/')
+    // }
     
 })
 
-router.get('/userProfile',(req,res) => {
-    if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email){
-            var thisUser = req.session.user.data
+router.get('/userProfile', userController.allowIfLoggedin, (req,res) => {
+    // if(typeof req.session.user !== 'undefined'){
+        if (req.session.user){
+            var thisUser = req.session.user
             res.render('userProfile', {thisUser : thisUser})
         }
-        else res.redirect('/')
-    }else{
-        res.redirect('/')
-    }
+        // else res.redirect('/')
+    // }else{
+        // res.redirect('/')
+    // }
     
 })
 
 
-router.get('/upload',(req,res) => {
-    if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email){
-            var thisUser = req.session.user.data
+router.get('/upload', userController.allowIfLoggedin, (req,res) => {
+    // if(typeof req.session.user !== 'undefined'){
+        if (req.session.user){
+            var thisUser = req.session.user
             res.render('upload' , {thisUser : thisUser})
         }
-        else res.redirect('/')
-    }else{
-        res.redirect('/')
-    }
+        // else res.redirect('/')
+    // }else{
+        // res.redirect('/')
+    // }
     
 })
 
-router.get('/approveUsers', dbController.users, (req,res) => {
-    if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email){
-            if (adminOrSuperOnly(req.session.user.data.role)){
-                var users = res.users.data;
-                var thisUser = req.session.user.data
+router.get('/approveUsers', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers, (req,res) => {
+    // if(typeof req.session.user !== 'undefined'){
+        if (req.session.user){
+            var thisUser = req.session.user
+            // if (adminOrSuperOnly(thisUser.role)){
+                var users = res.users;
 
                 res.render('approveUsers', {users: users.filter(isPending), thisUser : thisUser})
 
-            }
-            else res.redirect('/')
+            // }
+            // else res.redirect('/')
         }
-        else res.redirect('/')
-    }else{
-        res.redirect('/')
-    }
+        // else res.redirect('/')
+    // }else{
+        // res.redirect('/')
+    // }
     
 })
 
-router.get('/users', dbController.users, (req,res) => {
-    if(typeof req.session.user !== 'undefined'){
-        if (req.session.user.data.email){
-            if (adminOrSuperOnly(req.session.user.data.role)){
-                var users = res.users.data;
-                var thisUser = req.session.user.data
+router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers, (req,res) => {
+    // if(typeof req.session.user !== 'undefined'){
+        if (req.session.user){
+            // if (adminOrSuperOnly(req.session.user.data.role)){
+                var users = res.users;
+                var thisUser = req.session.user
                  res.render('users', {users: users.filter(notPending), thisUser: thisUser})
                  
-            }
-            else res.redirect('/')
+            // }
+            // else res.redirect('/')
         }
-        else res.redirect('/')
-    }else{
-        res.redirect('/')
-    }
+        // else res.redirect('/')
+    // }else{
+        // res.redirect('/')
+    // }
     
 })
 
-router.post('/upload', dbController.upload, (req, res) => {
-    res.send(200) 
+router.post('/upload', userController.allowIfLoggedin, fileController.upload, (req, res) => {
 })
 
-router.get('/files', dbController.files, (req, res) => {
-    var files = res.files.data
-    var thisUser = req.session.user.data
+router.get('/files', userController.allowIfLoggedin, fileController.getFiles, (req, res) => {
+    if (req.session.user){
 
-    res.render('files', {files: files, thisUser: thisUser})
+        var files = res.files
+        var thisUser = req.session.user
+
+        res.render('files', {files: files, thisUser: thisUser})
+    }
 })
 
-router.post('/deleteFile', dbController.deleteFile, (req,res) => {
+router.post('/deleteFile', userController.allowIfLoggedin, fileController.deleteFile, (req,res) => {
 
-    res.send(200)
+    // res.send(200)
      
 })
 
-router.post('/approve', dbController.approve, (req, res) => {
-    res.redirect('approveUsers')
+router.post('/approve', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.approveUser, (req, res) => {
+    // res.redirect('approveUsers')
      
 })
 
-router.post('/deny', dbController.delete, (req,res) => {
+router.post('/deny', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.deleteUser, (req,res) => {
 
-    res.redirect('approveUsers')
+    // res.redirect('approveUsers')
      
 })
-
-function adminOrSuperOnly(role){
-    if (role == "admin" || role == "superuser") return true
-    else return false
-}
 
 function notPending(user) {
     return user.role != "pending";
