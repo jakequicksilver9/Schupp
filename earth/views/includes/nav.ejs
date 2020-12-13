@@ -1,6 +1,6 @@
 <div class="dashboard-header">
     <nav class="navbar navbar-expand-lg bg-white fixed-top">
-        <img class="navbar-brand" src="horizontalLogo.png" alt="navbar logo"
+        <img onclick="goHome()" class="navbar-brand" src="horizontalLogo.png" alt="navbar logo"
             style=" margin-top: -1rem; margin-bottom: -1rem; width: 11%; ">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -119,14 +119,14 @@
 </div>
 
 <script>
-    // function logOut() {
-    //     alert("was up")
-    // }
-
-
     function logOut() {
         $.post("/logout", function () {
                 window.location.href = "/"
         })
+    }
+
+    function goHome(){
+        window.location.href = "/homePage"
+
     }
 </script>
