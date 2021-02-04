@@ -13,8 +13,10 @@ require("dotenv").config({
 const app = express()
 
 mongoose
- .connect('mongodb://schuppdb:dE2Vwf5W4OaTyE0eGJxUUFDPxQpAkoq7CJt2nQEQv9JLNrkuKy5bl0UmWpTkphP9BSFPSlG39jcJZlRHGhuXjA==@schuppdb.mongo.cosmos.azure.com:10255/?ssl=true&appName=@schuppdb@', { useNewUrlParser:true, useUnifiedTopology: true})
- .then(() => {
+//  .connect('mongodb://schuppdb:dE2Vwf5W4OaTyE0eGJxUUFDPxQpAkoq7CJt2nQEQv9JLNrkuKy5bl0UmWpTkphP9BSFPSlG39jcJZlRHGhuXjA==@schuppdb.mongo.cosmos.azure.com:10255/?ssl=true&appName=@schuppdb@', { useNewUrlParser:true, useUnifiedTopology: true})
+  .connect('mongodb+srv://mongo:passwordpassword@cluster0.xzgmd.mongodb.net/mongo?retryWrites=true&w=majority', { useNewUrlParser:true, useUnifiedTopology: true})
+ 
+.then(() => {
   console.log('Connected to the Database successfully');
  });
 
