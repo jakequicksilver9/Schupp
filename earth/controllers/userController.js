@@ -1,5 +1,4 @@
 const User = require('../classes/user')
-// const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { roles } = require('../classes/roles')
 
@@ -13,8 +12,6 @@ exports.grantAccess = function(action, resource) {
         const permission = roles.can(req.session.user.role)[action](resource)
         if (!permission.granted) {
             next(new Error("You don't have enough permission to perform this action"))
-            // error: "You don't have enough permission to perform this action"
-            // })
         }
         next()
       } else next()
@@ -29,13 +26,9 @@ exports.allowIfLoggedin = async (req, res, next) => {
   const user = req.session.user
   if (!user)
   next(res.redirect('/'))
-//    next(new Error("You need to be logged in to access this route"))
-    // error: 
-//    })
    req.user = user
    next()
   } catch (error) {
-//    next(error)
     res.redirect('/')
   }
 }
@@ -52,15 +45,10 @@ exports.signup = async (req, res, next) => {
     try {
         const { email, password, role, name, phone } = req.body
         const hashedPassword = await hashPassword(password)
-        const newUser = new User({ email, password: hashedPassword, role: "superuser", name:name, phone:phone })
-        // const accessToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-        // expiresIn: "1d"
-        // })
-        // newUser.accessToken = accessToken
+        const newUser = new User({ email, password: hashedPassword, role: "pending", name:name, phone:phone })
         await newUser.save()
         res.status(200).json({
             data: { email: newUser.email, role: newUser.role }
-            // accessToken
         })
     } catch (error) {
         res.status(500).json({
@@ -77,17 +65,9 @@ exports.login = async (req, res, next) => {
         if (!user) return next(new Error('Email does not exist'))
         const validPassword = await validatePassword(password, user.password)
         if (!validPassword) return next(new Error('Password is not correct'))
-        // const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        // expiresIn: "1d"
-        // })
-        // await User.findById(user._id)
         if (user.role != "pending"){
             res.user = { email: user.email, role: user.role, id:user._id }
             next()
-            // res.status(200).json({
-            // data: { email: user.email, role: user.role, id:user._id }
-            // ,accessToken
-            // })
         }
         else {
             throw new Error("Invalid Role")
@@ -100,9 +80,6 @@ exports.login = async (req, res, next) => {
 exports.getUsers = async (req, res, next) => {
 try {
     const users = await User.find({})
-    // res.status(200).json({
-    // data: users
-    // })
     res.users = users
     next()
 } catch (error) {
