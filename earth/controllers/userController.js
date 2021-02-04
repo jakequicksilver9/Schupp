@@ -1,6 +1,7 @@
 const User = require('../classes/user')
 const bcrypt = require('bcrypt')
 const { roles } = require('../classes/roles')
+const errors = require('../classes/errors')
 
 
 
@@ -70,7 +71,9 @@ exports.login = async (req, res, next) => {
             next()
         }
         else {
-            throw new Error("Invalid Role")
+            // throw roleError
+            res.error = errors.roleError
+            next()
         }
     } catch (error) {
         next(error)

@@ -126,8 +126,9 @@
     <script>
         function login() {
             if($('#email').val() !='' && $('#password').val() !='') {
-                $.post('/login',$('#loginForm').serialize()).done(function() {
-                    window.location.replace('/homePage')
+                $.post('/login',$('#loginForm').serialize()).done(function(response) {
+                    if (response == 'Invalid Role') window.location.replace('/pendingUser')
+                    else window.location.replace('/homePage')
                 }).fail(function(){
                     alert("Incorrect Username & Password.")
                 })

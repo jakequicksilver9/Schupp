@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController');
 const fileController = require('../controllers/fileController');
+const errors = require('../classes/errors')
+
 
 router.get('/',(req,res) => {
     if(req.session.user){
@@ -9,12 +11,15 @@ router.get('/',(req,res) => {
     } else res.render('index')
 })
 
-router.post('/login', userController.login, (req, res) => {
-    if(res.user){
-        req.session.user = res.user
-        res.sendStatus(200)
+router.post('/login', userController.login,  (req, res) => {
+    if (res.error == errors.roleError) res.status(200).send(errors.roleError.message)
+    else{
+        if(res.user){
+            req.session.user = res.user
+            res.sendStatus(200)
+        }
+        else res.send(403)
     }
-    else res.send(403)
 })
 
 router.post('/logout', (req, res) => {
@@ -27,6 +32,10 @@ router.post('/logout', (req, res) => {
 })
 
 router.post('/signUp', userController.signup, (req, res) => {
+})
+
+router.get('/pendingUser', (req,res) => {
+    res.render('pendingUserPage')
 })
 
 router.get('/homePage', userController.allowIfLoggedin, (req,res) => {
