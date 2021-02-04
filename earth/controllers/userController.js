@@ -66,7 +66,7 @@ exports.login = async (req, res, next) => {
         const validPassword = await validatePassword(password, user.password)
         if (!validPassword) return next(new Error('Password is not correct'))
         if (user.role != "pending"){
-            res.user = { email: user.email, role: user.role, id:user._id }
+            res.user = { email: user.email, role: user.role, id:user._id, name: user.name }
             next()
         }
         else {
