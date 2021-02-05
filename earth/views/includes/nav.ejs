@@ -1,3 +1,4 @@
+<body >
 <div class="dashboard-header">
     <nav class="navbar navbar-expand-lg bg-white fixed-top">
         <img onclick="goHome()" class="navbar-brand" src="horizontalLogo.png" alt="navbar logo"
@@ -10,7 +11,7 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto navbar-right-top">
                 <li class="nav-item dropdown notification">
-                    <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+                    <a onclick="notificationDot();" class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span
                             class="indicator"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
@@ -19,6 +20,7 @@
                             <div class="notification-list">
                                 <div class="list-group">
                                     <a href="approveUsers" class="list-group-item list-group-item-action active">
+                                        
                                         <div class="notification-info">
                                             <div class="notification-list-user-img"><img
                                                     src="assets/images/avatar-2.jpg" alt=""
@@ -26,12 +28,14 @@
                                             <div class="notification-list-user-block"><span
                                                     class="notification-list-user-name">Tiger Nixon</span>has submitted
                                                 an application.
-                                                <div class="notification-date">2 min ago</div>
+                                                <!-- <div class="notification-date">2 min ago</div> -->
                                             </div>
                                         </div>
+
                                     </a>
                                 </div>
                             </div>
+
                         </li>
                         <li>
                             <div class="list-footer"> <a href="#">View all notifications</a></div>
@@ -44,8 +48,7 @@
                     <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                         aria-labelledby="navbarDropdownMenuLink2">
                         <div class="nav-user-info">
-                            <h5 class="mb-0 text-white nav-user-name"><%= thisUser.name %> </h5>
-                            <span class="status"></span><span class="ml-2">Available</span>
+                            <h5 class="mb-0 text-white nav-user-name"><%= thisUser.name %></h5>
                         </div>
                         <a class="dropdown-item" href="/userProfile"><i class="fas fa-user mr-2"></i>Account</a>
                         <a class="dropdown-item" href="#" onclick="logOut()" id="logOut"><i
@@ -56,6 +59,7 @@
         </div>
     </nav>
 </div>
+</body>
 
 <script>
     function logOut() {
@@ -67,5 +71,10 @@
     function goHome(){
         window.location.href = "/homePage"
 
+    }
+
+    function notificationDot(){
+
+    $( ".indicator" ).css( "display", "none" );
     }
 </script>

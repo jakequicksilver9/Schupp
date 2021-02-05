@@ -1357,7 +1357,8 @@ Top Header
 
 .notification-list-user-name {
     color: #5969ff;
-    font-size: 14px;
+    /* font-size: 14px; */
+    font-size: 28px;
     margin-right: 8px;
 }
 
@@ -1383,6 +1384,8 @@ Top Header
 .conntection-footer a:hover {
     color: #fff;
 }
+
+/* notification red dot */
 
 .indicator {
     content: '';

@@ -3,6 +3,8 @@ const router = express.Router()
 const userController = require('../controllers/userController');
 const fileController = require('../controllers/fileController');
 const errors = require('../classes/errors')
+const notificationController = require('../controllers/notificationController');
+
 
 
 router.get('/',(req,res) => {
@@ -38,12 +40,20 @@ router.get('/pendingUser', (req,res) => {
     res.render('pendingUserPage')
 })
 
-router.get('/homePage', userController.allowIfLoggedin, (req,res) => {
+router.get('/homePage', userController.allowIfLoggedin, notificationController.getUserNotification, (req,res) => {
     if (req.session.user){
         var thisUser = req.session.user
-        res.render('homePage', {thisUser: thisUser})
+        res.render('homePage', {thisUser: thisUser, notifications: res.notifications})
     }
 })
+
+// router.get('/nav', userController.allowIfLoggedin, userController.getUsers, (req,res)  => {
+//     if (req.session.user){
+//         var thisUser = req.session.user;
+//         var users = res.users;
+//         res.render('nav', {unapprovedUser: users.filter(isPending),  thisUser: thisUser})
+//     }
+// })
 
 router.get('/manageInput', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), (req,res) => {
     if (req.session.user){
