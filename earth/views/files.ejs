@@ -111,10 +111,18 @@
             })
         }
 
+
+
         $(document).ready(function() {
-            $('#example').DataTable({
-            "pageLength": 35
+            initDatatable()
+            function initDatatable(){
+            var t = $('#example').DataTable({
+                columnDefs: [
+                    { orderable: false, targets: 2 },
+                    { orderable: false, targets: 3 }
+                ]
             });
+        }
 
         } );
 

@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
 <html lang="en">
+   
 <head>
     
     <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="login.css">
+
     <title>Log In</title>
     <link rel = "icon" href = "scale.png" type = "image/x-icon"> 
 
@@ -50,9 +52,11 @@
                         <input type="text" placeholder="Last name" class="form-control" id="lastName"> 
                         <input type="hidden" name="name" id="fullName">
                     </div>
-                    <div class="inputbox"> 
-                        <input name="email" id="signUpEmail" type="text" class="form-control" placeholder="Email"> 
-                    </div>
+                        <div class="inputbox"> 
+                            <input name="email" id="signUpEmail" type="text" class="form-control" placeholder="Email"> 
+                        </div>      
+
+
                     <!-- <div class="inputbox"> 
                         <input id="signUpUserName" type="text" class="form-control" placeholder="User Name"> 
                     </div> -->
@@ -76,9 +80,11 @@
                         </select>
                     </div> -->
 
-                    <div class="inputbox" data-tip="Password requires minimum 8 characters"> 
-                        <input name="password" id="signUpPassword" type="password" class="form-control" placeholder="Password">
-                    </div>
+                        <div class="inputbox" title="Password Requres Minimum 8 characters" > 
+                            <input name="password" id="signUpPassword" type="password" class="form-control" placeholder="Password"></i>
+                        </div>                       
+
+
                     <div class="inputbox"> 
                         <input id="signUpConfirmPassword" type="password" class="form-control" placeholder="Confirm Password"> 
                     </div>
@@ -125,6 +131,7 @@
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 
     <script>
+
         function login() {
             if($('#email').val() !='' && $('#password').val() !='') {
                 $.post('/login',$('#loginForm').serialize()).done(function(response) {
@@ -154,6 +161,9 @@
                     // modal1.style.display = "block";
                     alert("Password requires 8 characters.  Please try again")
                 }
+                if (!$('#signUpEmail').val().match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g)){
+                    alert("Email is improper format")
+                }
                 else {
                     $('#fullName').val($('#firstName').val() + " " + $('#lastName').val()) 
                     var testing = $('#signUpForm').serialize();
@@ -164,7 +174,7 @@
                 }
             }
             else{
-                alert("Please input Username & Password.")
+                alert("Please complete all fields.")
             }
         }
     </script>
