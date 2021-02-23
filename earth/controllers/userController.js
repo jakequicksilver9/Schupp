@@ -134,23 +134,20 @@ exports.approveUser = async (req, res, next) => {
         })
         next(error)
     }
-    }
+}
 
 exports.deleteUser = async (req, res, next) => {
-try {
-    const userId = req.body.id
-    await User.findByIdAndDelete(userId)
-    res.status(200).json({
-    data: null,
-    message: 'User has been deleted'
-    })
-} catch (error) {
-    res.status(500).json({
-        data: { message: "failure" }
-    })
-    next(error)
+    try {
+        const userId = req.body.id
+        await User.findByIdAndDelete(userId)
+        res.status(200).json({
+        data: null,
+        message: 'User has been deleted'
+        })
+    } catch (error) {
+        res.status(500).json({
+            data: { message: "failure" }
+        })
+        next(error)
+    }
 }
-}
-
-
-

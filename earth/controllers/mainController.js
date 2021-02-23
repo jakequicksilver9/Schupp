@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 const fileController = require('../controllers/fileController');
 const errors = require('../classes/errors')
 const notificationController = require('../controllers/notificationController');
+const emailController = require('../controllers/emailController');
 
 
 
@@ -36,6 +37,11 @@ router.post('/logout', (req, res) => {
 router.post('/signUp', userController.signup, (req, res) => {
 })
 
+router.post('/email', emailController.email, (req, res) => {
+
+})
+
+
 router.get('/pendingUser', (req,res) => {
     res.render('pendingUserPage')
 })
@@ -54,6 +60,8 @@ router.get('/homePage', userController.allowIfLoggedin, notificationController.g
 //         res.render('nav', {unapprovedUser: users.filter(isPending),  thisUser: thisUser})
 //     }
 // })
+
+
 
 router.get('/manageInput', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), (req,res) => {
     if (req.session.user){
@@ -103,6 +111,7 @@ router.get('/files', userController.allowIfLoggedin, fileController.getFiles, (r
         res.render('files', {files: files, thisUser: thisUser})
     }
 })
+
 
 router.post('/deleteFile', userController.allowIfLoggedin, fileController.deleteFile, (req,res) => {
 })

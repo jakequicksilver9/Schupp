@@ -147,7 +147,8 @@
         }
 
         function signUp() {
-            
+            $('#modal2').modal('show')
+            setTimeout(function(){ $('#modal2').modal('hide') }, 3500);
             // modal1.style.display = "none";
             if($('#signUpEmail').val() !='' && $('#signUpPassword').val() !='') {
                 if ($('#signUpPassword').val() != $('#signUpConfirmPassword').val()){

@@ -246,6 +246,7 @@
             });
 
             $('#example tbody').on('click', '.edit', function () {
+                alert("Hit Function!")
                 var editOfficeModal = document.getElementById("editOfficeModal");
                 // var id = $(this).attr("id").match(/\d+/)[0];
                 var id = t.row($(this).parents('tr'));
