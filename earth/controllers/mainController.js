@@ -61,54 +61,52 @@ router.get('/homePage', userController.allowIfLoggedin, notificationController.g
 //     }
 // })
 
-
-
-router.get('/manageInput', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), (req,res) => {
+router.get('/manageInput', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), notificationController.getUserNotification, (req,res) => {
     if (req.session.user){
         var thisUser = req.session.user
-        res.render('manageInput', {thisUser : thisUser})
+        res.render('manageInput', {thisUser: thisUser, notifications: res.notifications})
     }
 })
 
-router.get('/userProfile', userController.allowIfLoggedin, (req,res) => {
+router.get('/userProfile', userController.allowIfLoggedin, notificationController.getUserNotification, (req,res) => {
     if (req.session.user){
         var thisUser = req.session.user
-        res.render('userProfile', {thisUser : thisUser})
+        res.render('userProfile', {thisUser: thisUser, notifications: res.notifications})
     }
 })
 
 
-router.get('/upload', userController.allowIfLoggedin, (req,res) => {
+router.get('/upload', userController.allowIfLoggedin, notificationController.getUserNotification, (req,res) => {
     if (req.session.user){
         var thisUser = req.session.user
-        res.render('upload' , {thisUser : thisUser})
+        res.render('upload' , {thisUser: thisUser, notifications: res.notifications})
     }
 })
 
-router.get('/approveUsers', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers, (req,res) => {
+router.get('/approveUsers', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers, notificationController.getUserNotification, (req,res) => {
     if (req.session.user){
         var thisUser = req.session.user
         var users = res.users;
-        res.render('approveUsers', {users: users.filter(isPending), thisUser : thisUser})
+        res.render('approveUsers', {users: users.filter(isPending), thisUser: thisUser, notifications: res.notifications})
     }
 })
 
-router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers, (req,res) => {
+router.get('/users', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers, notificationController.getUserNotification, (req,res) => {
     if (req.session.user){
         var users = res.users;
         var thisUser = req.session.user
-        res.render('users', {users: users.filter(notPending), thisUser: thisUser})
+        res.render('users', {users: users.filter(notPending), thisUser: thisUser, notifications: res.notifications})
     }
 })
 
 router.post('/upload', userController.allowIfLoggedin, fileController.upload, (req, res) => {
 })
 
-router.get('/files', userController.allowIfLoggedin, fileController.getFiles, (req, res) => {
+router.get('/files', userController.allowIfLoggedin, fileController.getFiles, notificationController.getUserNotification, (req, res) => {
     if (req.session.user){
         var files = res.files
         var thisUser = req.session.user
-        res.render('files', {files: files, thisUser: thisUser})
+        res.render('files', {files: files, thisUser: thisUser, notifications: res.notifications})
     }
 })
 

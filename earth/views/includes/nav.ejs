@@ -19,26 +19,29 @@
                             <div class="notification-title"> Notification</div>
                             <div class="notification-list">
                                 <div class="list-group">
-                                    <a href="approveUsers" class="list-group-item list-group-item-action active">
-                                        
-                                        <div class="notification-info">
-                                            <div class="notification-list-user-img"><img
-                                                    src="assets/images/avatar-2.jpg" alt=""
-                                                    class="user-avatar-md rounded-circle"></div>
-                                            <div class="notification-list-user-block"><span
-                                                    class="notification-list-user-name">Tiger Nixon</span>has submitted
-                                                an application.
-                                                <!-- <div class="notification-date">2 min ago</div> -->
+                                    
+                                    <% for(let i = 0; i < notifications.length; i++) { %>
+                                        <a href="approveUsers" class="list-group-item list-group-item-action active">
+                                            <div class="notification-info">
+                                                <div class="notification-list-user-img"><img
+                                                        src="assets/images/avatar-2.jpg" alt=""
+                                                        class="user-avatar-md rounded-circle"></div>
+                                                <div class="notification-list-user-block"><span
+                                                        class="notification-list-user-name"><%= notifications[i].name %></span>awaiting approval
+                                                    <!-- <div class="notification-date">2 min ago</div> -->
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
+                                    <% } %>
 
-                                    </a>
                                 </div>
                             </div>
 
                         </li>
                         <li>
-                            <div class="list-footer"> <a href="#">View all notifications</a></div>
+                            <div class="list-footer"> 
+                                <!-- <a href="#">View all notifications</a> -->
+                            </div>
                         </li>
                     </ul>
                 </li>

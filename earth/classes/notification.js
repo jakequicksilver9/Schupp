@@ -2,19 +2,14 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
  
 const NotificationSchema = new Schema({
-    notificationType: {
-    type: String,
-    },
-    user: {
-    type: String,
-    },
+    notificationType: String,
+    user: String,
     role: {
-    type: String,
-    enum: ["pending","basic", "admin", "superuser"]
+        type: String,
+        enum: ["pending","basic", "admin", "superuser"]
     },
-    name: {
-        type: String
-    }
+    name: String
+    
 })
  
 
