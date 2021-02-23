@@ -2,7 +2,7 @@ const User = require('../classes/user')
 const bcrypt = require('bcrypt')
 const { roles } = require('../classes/roles')
 const errors = require('../classes/errors')
-const notification = require('../controllers/notificationController')
+const notificationController = require('../controllers/notificationController')
  
 exports.grantAccess = function(action, resource) {
  return async (req, res, next) => {
@@ -47,7 +47,7 @@ exports.signup = async (req, res, next) => {
         const newUser = new User({ email, password: hashedPassword, role: "pending", name:name, phone:phone })
         await newUser.save()
         var id = newUser._id
-        await notification.newUserNotification(req, res, next, id)
+        await notificationController.newUserNotification(req, res, next, id)
         res.status(200).json({
             data: { email: newUser.email, role: newUser.role }
         })
@@ -140,6 +140,7 @@ exports.deleteUser = async (req, res, next) => {
 try {
     const userId = req.body.id
     await User.findByIdAndDelete(userId)
+    await notificationController.deleteNotification(req, res, next, userId)
     res.status(200).json({
     data: null,
     message: 'User has been deleted'
