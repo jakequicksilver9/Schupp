@@ -65,8 +65,8 @@
                     </div> -->
                             <!-- <div class="inputbox"> <input id="signUpOfficePhone" type="text" class="form-control" placeholder="Office Phone"> </div> -->
                             <div class="inputbox">
-                                <input class="form-control" id="phoneNumber" placeholder="Phone Number" min="1"
-                                    maxlength="16" />
+                                <!-- <input class="form-control" id="phoneNumber" placeholder="Phone Number" min="1" maxlength="16" /> -->
+                                <input name="phone" id="signUpCellPhone" type="text" class="form-control" placeholder="Cell Phone"> 
                             </div>
                             <!-- <div class="inputbox"> <input id="signUpFax" type="text" class="form-control" placeholder="Fax"> </div> -->
 
@@ -172,8 +172,7 @@
                     if ($('#firstName').val() == '' || $('#lastName').val() == '') {
                         alert("First and last name must be filled out.")
                     }
-                    //NEED TO STRIP WHITE SPACE!!!
-                    else if (!$('#phoneNumber').val().match(/\((\d{3})\)(\d{3})-(\d{4})/g)) {
+                    else if (!$('#signUpCellPhone').val().match(/\((\d{3})\) (\d{3}) - (\d{4})/g)) {
                         alert("Phone number does not match (###)-###-### format")
                     }
                     //need to expand on the regex to include better passwords
@@ -245,7 +244,7 @@
                 else if (input.length > 0) { target.value = `(${zip}`; }
             };
 
-            const inputElement = document.getElementById('phoneNumber');
+            const inputElement = document.getElementById('signUpCellPhone');
             inputElement.addEventListener('keydown', enforceFormat);
             inputElement.addEventListener('keyup', formatToPhone);
 
