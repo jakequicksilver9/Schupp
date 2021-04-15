@@ -42,9 +42,9 @@ async function validatePassword(plainPassword, hashedPassword) {
  
 exports.signup = async (req, res, next) => {
     try {
-        const { email, password, role, name, phone } = req.body
+        const { email, password, role, name, phone, street, city, state, zip, officeName } = req.body
         const hashedPassword = await hashPassword(password)
-        const newUser = new User({ email, password: hashedPassword, role: "pending", name:name, phone:phone })
+        const newUser = new User({ email, password: hashedPassword, role: "pending", name:name, phone:phone, street: street, city:city, state:state,  zip:zip, officeName:officeName})
         await newUser.save()
         var id = newUser._id
         await notificationController.newUserNotification(req, res, next, id)
@@ -67,7 +67,7 @@ exports.login = async (req, res, next) => {
         const validPassword = await validatePassword(password, user.password)
         if (!validPassword) return next(new Error('Password is not correct'))
         if (user.role != "pending"){
-            res.user = { email: user.email, role: user.role, id:user._id, name: user.name }
+            res.user = { email: user.email, role: user.role, id:user._id, name: user.name, office:user.officeName }
             next()
         }
         else {

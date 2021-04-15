@@ -19,6 +19,15 @@ const FileSchema = new Schema({
     },
     type: {
         type: String
+    },
+    officeName: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    username: {
+        type: String
     }
 })
  

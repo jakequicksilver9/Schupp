@@ -8,7 +8,7 @@ const emailController = require('../controllers/emailController');
 
 router.get('/',(req,res) => {
     if(req.session.user){
-        res.redirect('/homePage')
+        res.redirect('/files')
     } else res.render('index')
 })
 
@@ -44,17 +44,13 @@ router.get('/pendingUser', (req,res) => {
     res.render('pendingUserPage')
 })
 
-router.get('/homePage', userController.allowIfLoggedin,  userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.getUsers, notificationController.getUserNotification, (req,res) => {
-    if (req.session.user){
-        var thisUser = req.session.user;
-        var users = res.users;
-        var activeUsers = users.filter(notPending);
-        var usersLength = Object.keys(activeUsers).length;
-        var unapprovedUser = users.filter(isPending);
-        var unapprovedUserLength = Object.keys(unapprovedUser).length;
-res.render('homePage', {thisUser: thisUser, notifications: res.notifications, usersLength: usersLength, unapprovedUserLength: unapprovedUserLength})
-    }
-})
+// router.get('/homePage', userController.allowIfLoggedin,  userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), notificationController.getUserNotification, (req,res) => {
+//     if (req.session.user){
+//         var thisUser = req.session.user;
+       
+// res.render('homePage', {thisUser: thisUser, notifications: res.notifications})
+//     }
+// })
 
 router.get('/manageInput', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), notificationController.getUserNotification, (req,res) => {
     if (req.session.user){

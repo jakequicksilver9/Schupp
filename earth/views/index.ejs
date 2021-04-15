@@ -60,29 +60,11 @@
                             </div>
 
 
-                            <!-- <div class="inputbox"> 
-                        <input id="signUpUserName" type="text" class="form-control" placeholder="User Name"> 
-                    </div> -->
-                            <!-- <div class="inputbox"> <input id="signUpOfficePhone" type="text" class="form-control" placeholder="Office Phone"> </div> -->
                             <div class="inputbox">
-                                <!-- <input class="form-control" id="phoneNumber" placeholder="Phone Number" min="1" maxlength="16" /> -->
                                 <input name="phone" id="signUpCellPhone" type="text" class="form-control" placeholder="Cell Phone"> 
                             </div>
-                            <!-- <div class="inputbox"> <input id="signUpFax" type="text" class="form-control" placeholder="Fax"> </div> -->
 
-                            <!-- <div class="inputbox">
-                        <select name="Watson Office" id="office" class="form-control">
-                        <option value="none" id="firstSelect" selected disabled hidden>Watson Office</option>
-                        <option value="Office1">Office1</option>
-                        <option value="Office2">Office2</option>
-                        <option value="Office3">Office3</option>
-                        <option value="Office4">Office4</option>
-                        <option value="Office5">Office5</option>
-                        <option value="Office6">Office6</option>
-                        <option value="Office7">Office7</option>
-                        <option value="Office8">Office8</option>
-                        </select>
-                    </div> -->
+                           
 
                             <div class="inputbox" title="Password Requres Minimum 8 characters">
                                 <input name="password" id="signUpPassword" type="password" class="form-control"
@@ -94,6 +76,33 @@
                                 <input id="signUpConfirmPassword" type="password" class="form-control"
                                     placeholder="Confirm Password">
                             </div>
+
+                            <div class="inputbox">
+                                <input name="officeName" id="officeName" type="text" class="form-control"
+                                    placeholder="Office Name">
+                            </div>
+
+                            <div class="inputbox">
+                                <input name="street" id="street" type="text" class="form-control"
+                                    placeholder="Office Street">
+                            </div>
+
+                            <div class="inputbox">
+                                <input name="city" id="city" type="text" class="form-control"
+                                    placeholder="Office City">
+                            </div>
+
+                            <div class="inputbox">
+                                <input name="state" id="state" type="text" class="form-control"
+                                    placeholder="Office State">
+                            </div>
+
+                            <div class="inputbox">
+                                <input name="zip" id="zip" type="text" class="form-control"
+                                    placeholder="Office Zip">
+                            </div>
+
+
                         </div>
                         <!-- <div class="mt-4 proceed" onclick="signUp()"> <button aria-label="Close" data-dismiss="modal" class="btn btn-primary btn-block d-flex flex-row justify-content-between align-items-center"> -->
                         <div class="mt-4 proceed" onclick="signUp()"> <button aria-label="Close"
@@ -148,7 +157,7 @@
                 if ($('#email').val() != '' && $('#password').val() != '') {
                     $.post('/login', $('#loginForm').serialize()).done(function (response) {
                         if (response == 'Invalid Role') window.location.replace('/pendingUser')
-                        else window.location.replace('/homePage')
+                        else window.location.replace('/files')
                     }).fail(function () {
                         alert("Incorrect Username & Password.")
                     })

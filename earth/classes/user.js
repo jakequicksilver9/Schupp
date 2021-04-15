@@ -24,8 +24,31 @@ const UserSchema = new Schema({
     },
     accessToken: {
     type: String
-    }
-})
+    },street: {
+    type: String,
+    required: false,
+    },
+    officeName: {
+    type: String,
+    required: false,
+    },
+    street: {
+    type: String,
+    required: false,
+    },
+    city: {
+    type: String,
+    required: false
+    },
+    state: {
+        type: String,
+        required: false
+        },
+    zip: {
+        type: String,
+        required: false
+    },
+    })
  
 const User = mongoose.model('user', UserSchema)
 
