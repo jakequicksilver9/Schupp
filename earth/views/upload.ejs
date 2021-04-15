@@ -73,7 +73,19 @@
                             </div>
                         </div>
                     </div>
+                    <div id="approveModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <!-- <span class="close">&times;</span> -->
+                            <div class="card-body">
+                                <h1>File Uploaded</h1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+                <!-- Started with modal here -->
             </div>
         </div>
         <!-- footer -->
@@ -84,6 +96,29 @@
     </div>
     <!-- end main wrapper  -->
 <script>
+
+
+
+
+$(document).ready(function () {
+
+
+            document.getElementsByClassName("close").onclick = function () {
+                approveModal.style.display = "none";
+            }
+
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == approveModal) {
+                    approveModal.style.display = "none";
+                }
+            }
+
+        });
+
+
+
     document.querySelector('.custom-file-input').addEventListener('change', function (e) {
             var name = document.getElementById("customFileInput").files[0].name;
             var nextSibling = e.target.nextElementSibling
@@ -94,7 +129,8 @@
             var file = document.getElementById("customFileInput").files[0]
             if(file){
                 
-              readFile(file, file.name)
+            readFile(file, file.name)
+
 
             } else {
                 alert("Please select a file.")
@@ -103,7 +139,14 @@
 
         function cb(base64string, fileName) {
             $.post('/upload',{file: base64string, name: fileName}).done(function(data) {
-               alert("File sucessfully uploaded")
+            //    alert("File sucessfully uploaded")
+               var approveModal = document.getElementById("approveModal");
+                approveModal.style.display = "block";
+
+                setTimeout(function () {
+                    approveModal.style.display = "none";
+                        }, 2500);
+
             }).fail(function(){
                 alert("Failed to upload.")
             })
