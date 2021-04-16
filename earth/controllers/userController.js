@@ -103,14 +103,28 @@ try {
 }
 }
 
+exports.getThisUser = async (req, res, next) => {
+    try {
+        const userId = req.session.user.id
+        const user = await User.findById(userId)
+        if (!user) return next(new Error('User does not exist'))
+        res.userData = user
+        next()
+    } catch (error) {
+        next(error)
+    }
+    }
+
 exports.updateUser = async (req, res, next) => {
 try {
-    const update = req.body
-    const userId = req.params.userId
+    const update = req.body.user
+    const userId = req.session.user.id
     await User.findByIdAndUpdate(userId, update)
     const user = await User.findById(userId)
+    req.session.user = { email: user.email, role: user.role, id:user._id, name: user.name, office:user.officeName }
+
     res.status(200).json({
-    data: user,
+    // data: user,
     message: 'User has been updated'
     })
 } catch (error) {

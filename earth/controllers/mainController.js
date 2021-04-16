@@ -59,10 +59,11 @@ router.get('/manageInput', userController.allowIfLoggedin, userController.grantA
     }
 })
 
-router.get('/userProfile', userController.allowIfLoggedin, notificationController.getUserNotification, (req,res) => {
+router.get('/userProfile', userController.allowIfLoggedin, notificationController.getUserNotification, userController.getThisUser, (req,res) => {
     if (req.session.user){
         var thisUser = req.session.user
-        res.render('userProfile', {thisUser: thisUser, notifications: res.notifications})
+        var userData = res.userData
+        res.render('userProfile', {thisUser: thisUser, userData: userData, notifications: res.notifications})
     }
 })
 
@@ -106,6 +107,9 @@ router.post('/deleteFile', userController.allowIfLoggedin, fileController.delete
 })
 
 router.post('/approve', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.approveUser, (req, res) => {
+})
+
+router.post('/updateUser', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.updateUser, (req, res) => {
 })
 
 router.post('/deny', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.deleteUser, (req,res) => {
