@@ -69,8 +69,8 @@
                                     <td><%= files[i].username %></td>
                                     <td><%= files[i].officeName %></td>
                                     <td><%= files[i].email %></td>
-                                    <td><input type="button" class="approve btn btn-primary" id="download" value="download" onclick="download('<%= files[i].file %>','<%= files[i].name %>' )"/></td>
-                                    <td><input type="button" class="approve btn btn-secondary" id="delete" value="delete" onclick="deleteFile('<%= files[i]._id %>')"/></td>
+                                    <td><input type="button" class="approve btn btn-primary" id="download" value="Download" onclick="download('<%= files[i].file %>','<%= files[i].name %>' )"/></td>
+                                    <td><input type="button" class="approve btn btn-secondary" id="delete" value="Delete" onclick="deleteFile('<%= files[i]._id %>')"/></td>
                                 </tr>
                             <% } %>
                         </tbody>

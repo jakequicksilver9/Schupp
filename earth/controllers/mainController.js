@@ -106,6 +106,9 @@ router.get('/files', userController.allowIfLoggedin, fileController.getFiles, no
 router.post('/deleteFile', userController.allowIfLoggedin, fileController.deleteFile, (req,res) => {
 })
 
+router.post('/deleteUser', userController.allowIfLoggedin, userController.deleteUser, (req,res) => {
+})
+
 router.post('/approve', userController.allowIfLoggedin, userController.grantAccess('readAny', 'profile'), userController.approveUser, (req, res) => {
 })
 

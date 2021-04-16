@@ -81,7 +81,7 @@
                                     <td><%= users[i].phone %></td>
                                     <td><%= users[i].role %></td>
                                     <td>
-                                             id="approve" value="Approve" onclick="approve('<%= users[i]._id %>')"/>
+                                            <input type="button" class="btn btn-primary" id="approve" value="Approve" onclick="approve('<%= users[i]._id %>')"/>
                                     </td>
                                     <td>
                                         <input type="button" class="deny btn btn-secondary" id="deny" value="Deny" onclick="deny('<%= users[i]._id %>')"/>
